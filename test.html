@@ -1,0 +1,50 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="test.css"/>
+        
+    </head>
+    <body>
+        <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+              <label for="passwort">Passwort:</label>
+              <input id="passwort"type="password">
+              <button id="submit-button" onclick="submit_password()"> Bestätigen </button>
+            </div>
+        </div>
+
+        <span id="content" style="display: none;">
+            <button id="b1" class="button" onclick="start()">
+                Start!
+            </button>
+            <button id="b2" class="button" onclick="stop()">
+                Stop!
+            </button>
+            <button id="b3" class="button" onclick="clear()">
+                Clear!
+            </button>
+            <div style="margin: 10px;">
+                <label for="color-line"> Farbe</label>
+                <input id="color-line" type="color">
+                <input id="edit" type="checkbox">
+                <label for="interval-timer"> Interval in sekunden</label>
+                <input id="interval-timer" type="range" min="0.1" max="10" step="0.1" value="5">
+                <input id="timer-label" type="text">
+                <input type="datetime-local">
+                <input type="number">
+                <input type="radio">
+                <input type="reset">
+                <input type="file">
+                <input type="search">
+                <input type="tel">
+                <input type="time">
+                <input type="url">
+                <input type="button">
+            </div>
+
+            <canvas id="myCanvas" width="1000" height="600" style="border:1px solid #000000;">
+            </canvas>
+        </span>
+        <script src="test.js"></script>
+    </body>
+</html>
