@@ -1,9 +1,9 @@
 body {
-    background-color: grey;
+    background-image: url(https://wallpaperaccess.com/full/3374936.jpg);
     margin: 0;
 }
 
-.page{
+.page {
     display: flex;
     height: 100%;
     overflow: auto;
@@ -12,19 +12,19 @@ body {
     margin: 0;
 }
 
-.header{
+.header {
     justify-self: flex-start;
     position: sticky;
     top: 0;
 }
 
-.header-menue{
+.header-menue {
     flex:0;
     display: flex;
     flex-direction: row;
     height: 40px;
     margin-bottom: 0;
-    background-color: black;
+    background-color: transparent;
     padding-top: 0;
     min-height: 0;
     padding: 0;
@@ -43,29 +43,30 @@ body {
     
 }
 
-.header-menue il {
+.header-menue > a {
     display: block;
     height:30px;
     margin-top: 5px;
-    background-color: lightblue;
+    background-color: rgba(173, 216, 230, 0.233);
+    color: white;
+    text-decoration: none;
     text-align: center;
     flex: 1;
     min-height: 0;
 }
 
-.header-menue il:hover {
-    background-color: lightcoral;
+.header-menue a:hover {
+    background-color: rgb(126, 197, 221);
 }
 
 .content{
-    background-color: cornflowerblue;
     min-height: fit-content;
 }
 
 .footer{
     width: 100%;
-    justify-self: flex-end;
-    background-color: black;
+    bottom: 0;
+    background-color: white;
     min-height: 50px;
 }
 
@@ -88,10 +89,36 @@ body {
 
 .post {
     display: flex;
-    background-color: indigo;
+    background-color: rgba(76, 0, 130, 0.233);
     color: white;
+    font-size: 3em;
     width: 250px;
     height: 250px;
     justify-content: center;
     align-items: center;
 }
+
+.contact-field {
+    margin-top: 70%;
+}
+
+.contact-field > h1 {
+    color: white;
+}
+
+.contact-field * {
+    display: block;
+}
+
+@media (min-width: 880px) {
+    .content {
+        height: 100%;
+        overflow: auto;
+    }
+    .post-container {
+        height:100%;
+    }
+}
+
+
+
