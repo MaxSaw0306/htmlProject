@@ -18,7 +18,7 @@
                     <a>
                         Field4
                     </a>
-                    <a href="../kontaktpunkt.html" target="_blank">
+                    <a href="#contactfield">
                         Kontakte
                     </a>
                 </ul>
@@ -56,15 +56,30 @@
                         </div>
                     </div>
                 </div>
-                <div class="contact-field">
-                    <h1>
-                        Kontakt
-                    </h1>
+                <div id="contactfield" class="contact-field">
                     <div>
                         <form class="form" action="mailto:maximusprime563@gmail.com">
                             <input name="mail-empfaenger" type="text" placeholder="E-Mail"/>
-                            <input name="betreff" type="text" placeholder="Betreff"/>
-                            <textarea name="nachricht" style="resize: none;  width: 300px; height: 250px;"></textarea>
+                            <fieldset>
+                                <legend>
+                                    Email
+                                </legend>
+                                <input name="betreff" type="text" placeholder="Betreff" list="betreffe"/>
+                                <datalist id="betreffe">
+                                    <option value="Hilfe">
+                                    <option value="Vorschlag">
+                                    <option value="Wunsch">
+                                </datalist>
+                                <label class="label" for="nachricht">
+                                    Mail
+                                </label>
+                                <textarea name="nachricht" style="resize: none;" rows="25"></textarea>
+                            </fieldset>
+                            <select>
+                                <option value="help"> value </option>
+                                <option value="proposal"> proposal </option>
+                                <option value="wish"> wish </option>
+                            </select>
                             <input type="submit"/>
                         </form>
                     </div>

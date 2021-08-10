@@ -65,9 +65,9 @@ body {
 
 .footer{
     width: 100%;
-    bottom: 0;
     background-color: white;
     min-height: 50px;
+    justify-self: flex-end;
 }
 
 .post-container {
@@ -99,16 +99,19 @@ body {
 }
 
 .contact-field {
-    margin-top: 70%;
+    margin-top: 800px;
+    width: 100%;
 }
 
 .contact-field > h1 {
     color: white;
 }
 
+
 .contact-field * {
     display: block;
 }
+
 
 @media (min-width: 880px) {
     .content {
@@ -120,5 +123,29 @@ body {
     }
 }
 
+.form {
+    /* display: flex;
+    flex-direction: column;
+    justify-content: center; */
+    padding-left: 10%;
+    padding-right: 10%;
+    min-width: 0;
+}
 
+.form >  * {
+    display: inline-block;
+    width:100%;
+    margin-bottom: 10px;
+    padding: 15px;
+    /*flex: 1;*/
+}
 
+.label {
+    color: white;
+    font-size: 2em;
+    display: inline;
+    margin-left: -100px;
+    float: left;
+    width: auto;
+    margin-top: 50px;
+}
