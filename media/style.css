@@ -56,14 +56,15 @@ body {
 }
 
 @keyframes menufield{
-    from {padding: 0;}
-    to {padding: 10px;}
+    0% {padding: 0;}
+    100% {padding-right: 200px;}
 }
 
 .header-menue a:hover {
     background-color: rgb(126, 197, 221);
     animation-name: menufield;
-    animation-duration: 1s;
+    animation-duration: 10s;
+    animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
 }
 
