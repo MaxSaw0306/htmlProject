@@ -55,8 +55,16 @@ body {
     min-height: 0;
 }
 
+@keyframes menufield{
+    from {padding: 0;}
+    to {padding: 10px;}
+}
+
 .header-menue a:hover {
     background-color: rgb(126, 197, 221);
+    animation-name: menufield;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
 }
 
 .content{
