@@ -1,0 +1,165 @@
+@mixin pattern($display: 'initial', $color: 'initial', $width: 'initial', $height: 'initial', $margin: 'initial', $padding: 'initial'){
+    display: $display;
+    color: $color;
+    width: $width;
+    height: $height;
+    margin: $margin;
+    padding: $padding;
+}
+
+body {
+    background-image: url(https://wallpaperaccess.com/full/3374936.jpg);
+    margin: 0;
+}
+
+.page {
+    @include pattern($display: flex, $margin: 0);
+    height: 100%;
+    overflow: auto;
+    min-height: 0;
+    flex-direction: column;
+}
+
+.header {
+    justify-self: flex-start;
+    position: sticky;
+    top: 0;
+}
+
+.header-menue {
+    @include pattern($display: flex, $height: 40px, $padding: 0, $margin: 0);
+    flex:0;
+    flex-direction: row;
+    background-color: transparent;
+    min-height: 0;
+
+    & > a {
+        /* $display, $color, $width, $height, $margin, $padding */
+        @include pattern($display: block, $height:30px, $margin: 5px 0 0, $color: #ffffff);
+        background-color: rgba(173, 216, 230, 0.233);
+        text-decoration: none;
+        text-align: center;
+        flex: 1;
+        min-height: 0;
+    
+        &:hover {
+            background-color: rgb(126, 197, 221);
+            animation-name: menufield;
+            animation-duration: 10s;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: forwards;
+        }
+    }
+}
+
+
+@media (max-width: 600px) {
+    .header-menue {
+        flex-direction: column;
+        height: 150px;
+    }
+
+    .header {
+        position: relative;
+    }
+}
+
+@keyframes menufield {
+    0% {padding: 0;}
+    100% {padding-right: 200px;}
+}
+
+.content {
+    min-height: fit-content;
+}
+
+.footer {
+    width: 100%;
+    background-color: white;
+    min-height: 50px;
+    justify-self: flex-end;
+}
+
+.post-container {
+    @include pattern($display: grid, $width: 100%, $margin: 50px 0 0);
+    -ms-grid-row-span: 3;
+    -ms-grid-column-span: 3;
+    row-gap: 10px;
+    column-gap: 10px;
+}
+
+@mixin grid-post($row_start, $row_end, $col_start, $col_end) {
+    grid-row-start: $row_start;
+    grid-row-end: $row_end;
+    grid-column-start: $col_start;
+    grid-column-end: $col_end;
+}
+
+.grid-post1 {
+    @include grid-post($row_start:1, $row_end:2, $col_start:1, $col_end:4);
+}
+
+.grid-post2 {
+    @include grid-post($row_start:2, $row_end:3, $col_start:1, $col_end:2);
+}
+
+.grid-post3 {
+    @include grid-post($row_start:2, $row_end:3, $col_start:2, $col_end:4);
+}
+
+.grid-post4 {
+    @include grid-post($row_start:3, $row_end:4, $col_start:1, $col_end:2);
+}
+
+.grid-post5 {
+    @include grid-post($row_start:3, $row_end:4, $col_start:2, $col_end:3);
+}
+
+.grid-post6 {
+    @include grid-post($row_start:3, $row_end:4, $col_start:3, $col_end:4);
+}
+
+.post {
+    @include pattern($display: flex, $color: #ffffff);
+    background-color: rgba(76, 0, 130, 0.233);
+    font-size: 3em;
+    justify-content: center;
+    align-items: center;
+
+    &:hover{
+        background-color: rgba(156, 41, 238, 0.486)
+    }
+}
+
+.contact-field {
+    @include pattern($margin: 800px 0 0, $width: 100%);
+    & > h1 {
+        color: white;
+    }
+}
+
+.contact-field * {
+    display: block;
+}
+
+@media (min-width: 880px) {
+    .content {
+        height: 100%;
+        overflow: auto;
+    }
+}
+
+.form {
+    padding: 0 10% 0 10%;
+    min-width: 0;
+
+    & > * {
+        @include pattern($display: inline-block, $width:100%, $margin: 0 0 10px, $padding: 15px );
+    }
+}
+
+.label {
+    @include pattern($display: inline, $color: #ffffff, $width: auto, $margin: 50px 0 0 -100px);
+    font-size: 2em;
+    float: left;
+}

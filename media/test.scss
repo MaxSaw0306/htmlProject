@@ -1,0 +1,11 @@
+$test: 1;
+
+.test {
+    width: $test;
+}
+
+@mixin test2{
+    height: $test;
+}
+
+@include test2;
