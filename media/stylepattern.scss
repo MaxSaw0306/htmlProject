@@ -1,10 +1,15 @@
-@mixin pattern($display: 'initial', $color: 'initial', $width: 'initial', $height: 'initial', $margin: 'initial', $padding: 'initial'){
+@mixin pattern($display: 'initial', $color: 'initial', $width: 'initial', $height: 'initial', $margin: 'initial', $padding: 'initial', $background-color: 'inital') {
     display: $display;
     color: $color;
     width: $width;
     height: $height;
     margin: $margin;
     padding: $padding;
+    background-color: $background-color;
+}
+
+@mixin grid($-ms-grid-row-span: 'initial', $-ms-grid-column-span: 'initial', $row-gap: 'initial', $column-gap: 'initial') {
+    @include pattern($display: grid, $width: 100%, $margin: 50px 0 0);
 }
 
 body {
@@ -13,10 +18,8 @@ body {
 }
 
 .page {
-    @include pattern($display: flex, $margin: 0);
-    height: 100%;
+    @include pattern($display: flex, $margin: 0, $height: 100%);
     overflow: auto;
-    min-height: 0;
     flex-direction: column;
 }
 
@@ -26,47 +29,64 @@ body {
     top: 0;
 }
 
-.header-menue {
-    @include pattern($display: flex, $height: 40px, $padding: 0, $margin: 0);
-    flex:0;
-    flex-direction: row;
-    background-color: transparent;
-    min-height: 0;
+.dropdown {
+    @include pattern($display: block, $height:50px, $margin: 5px 0 0, $color: #ffffff, $background-color: #add8e63b);
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
+}
 
-    & > a {
-        /* $display, $color, $width, $height, $margin, $padding */
-        @include pattern($display: block, $height:30px, $margin: 5px 0 0, $color: #ffffff);
-        background-color: rgba(173, 216, 230, 0.233);
+.test{
+    padding: 0;
+    width: 20%;
+
+    & > li > a {
+        @include pattern($display: none ,$height: 50px, $width: 80%, $margin:0 0 0 10%, $color: #ffffff, $background-color: #add8e6);
         text-decoration: none;
         text-align: center;
-        flex: 1;
-        min-height: 0;
-    
+        z-index: 1;
+    }
+
+    &:hover > li > a {
+        display: block;
+
         &:hover {
-            background-color: rgb(126, 197, 221);
-            animation-name: menufield;
-            animation-duration: 10s;
-            animation-timing-function: ease-in-out;
-            animation-fill-mode: forwards;
+            color: red;
         }
+    }
+
+    &:hover .dropdown{
+        background-color: #7ec5dd;
+        animation: menufield 0.25s ease-in-out forwards;
     }
 }
 
+.header-menue {
+    @include pattern($display: flex, $height: 40px, $padding: 0, $margin: 0, $background-color: transparent);
+    flex:0;
+    flex-direction: row;
 
-@media (max-width: 600px) {
-    .header-menue {
-        flex-direction: column;
-        height: 150px;
-    }
+    & > li {
+        @include pattern($display: inline, $width:20%);
+        list-style: none;
 
-    .header {
-        position: relative;
+        & > a {
+            @include pattern($display: block, $height:50px, $margin: 5px 0 0, $color: #ffffff, $background-color: #add8e63b);
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+            
+            &:hover {
+                background-color: #7ec5dd;
+                animation: menufield 0.25s ease-in-out forwards;
+            }
+        }
     }
 }
 
 @keyframes menufield {
     0% {padding: 0;}
-    100% {padding-right: 200px;}
+    100% {padding: 10px;}
 }
 
 .content {
@@ -74,18 +94,13 @@ body {
 }
 
 .footer {
-    width: 100%;
-    background-color: white;
+    @include pattern($width: 100%, $background-color: #ffffff);
     min-height: 50px;
     justify-self: flex-end;
 }
 
 .post-container {
-    @include pattern($display: grid, $width: 100%, $margin: 50px 0 0);
-    -ms-grid-row-span: 3;
-    -ms-grid-column-span: 3;
-    row-gap: 10px;
-    column-gap: 10px;
+    @include grid($-ms-grid-row-span: 3, $-ms-grid-column-span: 3, $row-gap: 10px, $column-gap: 10px);
 }
 
 @mixin grid-post($row_start, $row_end, $col_start, $col_end) {
@@ -120,21 +135,20 @@ body {
 }
 
 .post {
-    @include pattern($display: flex, $color: #ffffff);
-    background-color: rgba(76, 0, 130, 0.233);
+    @include pattern($display: flex, $color: #ffffff, $background-color: hsla(275, 100%, 25%, 0.231));
     font-size: 3em;
     justify-content: center;
     align-items: center;
 
     &:hover{
-        background-color: rgba(156, 41, 238, 0.486)
+        background-color: hsla(275, 85%, 55%, 0.425)
     }
 }
 
 .contact-field {
     @include pattern($margin: 800px 0 0, $width: 100%);
     & > h1 {
-        color: white;
+        color: #ffffff;
     }
 }
 
@@ -162,4 +176,36 @@ body {
     @include pattern($display: inline, $color: #ffffff, $width: auto, $margin: 50px 0 0 -100px);
     font-size: 2em;
     float: left;
+}
+
+@media (max-width: 600px) {
+    $a: 1;
+    $b: 2;
+    .header-menue {
+        height: 150px;
+    }
+
+    .header {
+        position: relative;
+    }
+    .post-container {
+        @include grid($-ms-grid-row-span: 6, $-ms-grid-column-span: 1, $column-gap: 10px);
+    }
+
+    @for $i from 1 through 6 {
+        .grid-post#{$i} {
+            @include grid-post($row_start: $a, $row_end: $b, $col_start:1, $col_end:2);
+            $a: $a+1;
+            $b: $b+1;
+        }
+    }
+
+    video {
+        width: 400px;
+    }
+    .label {
+        @include pattern($display: block, $color: #ffffff, $width: auto, $margin:0);
+        font-size: 2em;
+        float: none;
+    }
 }
