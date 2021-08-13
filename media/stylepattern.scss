@@ -1,3 +1,7 @@
+ul{
+    list-style: none;
+    padding: 0;
+}
 @mixin pattern($display: 'initial', $color: 'initial', $width: 'initial', $height: 'initial', $margin: 'initial', $padding: 'initial', $background-color: 'inital') {
     display: $display;
     color: $color;
@@ -37,11 +41,10 @@ body {
 }
 
 .test{
-    padding: 0;
     width: 20%;
 
     & > li > a {
-        @include pattern($display: none ,$height: 50px, $width: 80%, $margin:0 0 0 10%, $color: #ffffff, $background-color: #add8e6);
+        @include pattern($display: none ,$height: 50px, $width: 100%, $margin: 0, $color: #ffffff, $background-color: #add8e6);
         text-decoration: none;
         text-align: center;
         z-index: 1;
@@ -207,5 +210,82 @@ body {
         @include pattern($display: block, $color: #ffffff, $width: auto, $margin:0);
         font-size: 2em;
         float: none;
+    }
+}
+
+@mixin contact-button {
+    @include pattern($display: none ,$height: 50px, $width: 100%, $margin: 0, $color: #ffffff, $background-color: #add8e6);
+    text-decoration: none;
+    text-align: center;
+    z-index: 1;
+
+    &:hover {
+        color: red;
+    }
+}
+
+.mail-cover {
+    @include contact-button();
+}
+
+.mail-value {
+    @include contact-button();
+}
+
+.tel-cover {
+    @include contact-button();
+}
+
+.tel-value {
+    @include contact-button();
+}
+
+.insta-cover {
+    @include contact-button();
+}
+
+.insta-value {
+    @include contact-button();
+}
+
+.test:hover {
+    & .mail-cover {
+        display: block;
+    }
+
+    & .tel-cover {
+        display: block;
+    }
+
+    & .insta-cover {
+        display: block;
+    }
+}
+
+.contact-container {
+    &:hover {
+        & .mail-cover {
+            display: none;
+        }
+
+        & .mail-value {
+            display: block;
+        }
+
+        & .tel-cover {
+            display: none;
+        }
+
+        & .tel-value {
+            display: block;
+        }
+
+        & .insta-cover {
+            display: none;
+        }
+
+        & .insta-value {
+            display: block;
+        }
     }
 }
