@@ -13,6 +13,8 @@ ul{
 }
 
 @mixin grid($-ms-grid-row-span: 'initial', $-ms-grid-column-span: 'initial', $row-gap: 'initial', $column-gap: 'initial') {
+    row-gap: $row-gap;
+    column-gap: $column-gap;
     @include pattern($display: grid, $width: 100%, $margin: 50px 0 0);
 }
 
@@ -47,7 +49,6 @@ body {
         @include pattern($display: none ,$height: 50px, $width: 100%, $margin: 0, $color: #ffffff, $background-color: #add8e6);
         text-decoration: none;
         text-align: center;
-        z-index: 1;
     }
 
     &:hover > li > a {
@@ -159,13 +160,6 @@ body {
     display: block;
 }
 
-@media (min-width: 880px) {
-    .content {
-        height: 100%;
-        overflow: auto;
-    }
-}
-
 .form {
     padding: 0 10% 0 10%;
     min-width: 0;
@@ -179,38 +173,6 @@ body {
     @include pattern($display: inline, $color: #ffffff, $width: auto, $margin: 50px 0 0 -100px);
     font-size: 2em;
     float: left;
-}
-
-@media (max-width: 600px) {
-    $a: 1;
-    $b: 2;
-    .header-menue {
-        height: 150px;
-    }
-
-    .header {
-        position: relative;
-    }
-    .post-container {
-        @include grid($-ms-grid-row-span: 6, $-ms-grid-column-span: 1, $column-gap: 10px);
-    }
-
-    @for $i from 1 through 6 {
-        .grid-post#{$i} {
-            @include grid-post($row_start: $a, $row_end: $b, $col_start:1, $col_end:2);
-            $a: $a+1;
-            $b: $b+1;
-        }
-    }
-
-    video {
-        width: 400px;
-    }
-    .label {
-        @include pattern($display: block, $color: #ffffff, $width: auto, $margin:0);
-        font-size: 2em;
-        float: none;
-    }
 }
 
 @mixin contact-button {
@@ -287,5 +249,49 @@ body {
         & .insta-value {
             display: block;
         }
+    }
+}
+/* Media */
+@media (min-width: 880px) {
+    .content {
+        height: 100%;
+        overflow: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    $a: 1;
+    $b: 2;
+    .header-menue {
+        height: 150px;
+    }
+
+    .header {
+        position: relative;
+    }
+    .post-container {
+        @include grid($-ms-grid-row-span: 6, $-ms-grid-column-span: 1, $column-gap: 10px);
+    }
+
+    @for $i from 1 through 6 {
+        .grid-post#{$i} {
+            @include grid-post($row_start: $a, $row_end: $b, $col_start:1, $col_end:2);
+            $a: $a+1;
+            $b: $b+1;
+        }
+    }
+
+    video {
+        width: 400px;
+    }
+    .label {
+        @include pattern($display: block, $color: #ffffff, $width: auto, $margin:0);
+        font-size: 2em;
+        float: none;
+    }
+
+    .test > li > a {
+        height: fit-content;
+        z-index: 10;
     }
 }
