@@ -19,7 +19,7 @@ cv.stroke();
 
 function addMonth(event,test){
     const month = document.getElementById("month").value;
-    const value = document.getElementById("value").value;
+    const value = (document.getElementById("value").value * 10);
     const color = document.getElementById("color").value;
     data.values.push({Month: month, Value: value, Color: color});
 }

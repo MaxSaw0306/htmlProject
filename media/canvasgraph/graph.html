@@ -14,23 +14,10 @@
                 </canvas>
             </div>
             <form class="form" onsubmit="preventDefault(event)">
-                <input id="month" type="text" placeholder="Monat" list="months"/>
-                <datalist id="months">
-                    <option value="Januar">
-                    <option value="Februar">
-                    <option value="März">
-                    <option value="Aprl">
-                    <option value="Juni">
-                    <option value="Juli">
-                    <option value="August">
-                    <option value="September">
-                    <option value="Oktober">
-                    <option value="November">
-                    <option value="Dezember">
-                </datalist>
-                <input id="value" type="number" placeholder="Wert"/>
+                <input id="month" type="date"/>
+                <input id="value" type="number" step="any" placeholder="Stunden"/>
                 <button onclick="addMonth(event)">
-                    Erstelle Monat
+                    Erstelle Stunde
                 </button>
                 <button onclick="createGraph()">
                     Erstelle Graph
