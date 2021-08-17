@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="graphstyle.css">
+        <meta charset="utf-8"/>
+        <title>
+            Diagramm
+        </title>
+    </head>
+    <body>
+        <div class="page">
+            <div>
+                <canvas id="graph" class="graph">
+                    hey
+                </canvas>
+            </div>
+            <form class="form" onsubmit="preventDefault(event)">
+                <input id="month" type="text" placeholder="Monat" list="months"/>
+                <datalist id="months">
+                    <option value="Januar">
+                    <option value="Februar">
+                    <option value="März">
+                    <option value="Aprl">
+                    <option value="Juni">
+                    <option value="Juli">
+                    <option value="August">
+                    <option value="September">
+                    <option value="Oktober">
+                    <option value="November">
+                    <option value="Dezember">
+                </datalist>
+                <input id="value" type="number" placeholder="Wert"/>
+                <button onclick="addMonth(event)">
+                    Erstelle Monat
+                </button>
+                <button onclick="createGraph()">
+                    Erstelle Graph
+                </button>
+            </form>
+            <input id="color" type="color">
+        </div>
+        <script src="graphcode.js"></script>
+    </body>
+</html>

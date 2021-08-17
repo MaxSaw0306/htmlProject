@@ -3,17 +3,6 @@ var safe = 1;
 var timertime = document.getElementById("interval-timer").value;
 var pass_key = "test123";
 
-function submit_password(pass_key) {
-    var pass = document.getElementById("passwort").value
-    if (pass == pass_key) {
-        document.getElementById("content").style.display = block
-    }
-
-    if (pass != pass_key) {
-        console.warn("Falsches Passwort!!!");
-    }
-    
-}
 
 function draw() {
     if (safe == 1) {
