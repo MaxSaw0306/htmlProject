@@ -8,43 +8,33 @@
         </title>
     </head>
     <body>
-        <div class="page">
-            <canvas id="graph" class="plain">
-            </canvas>
-            <input type="image" src="C:\Users\MaximSaweljew\Pictures\Saved Pictures\snake-head.jfif" onkeypress="moveSnake(event)" id="playerhead" class="thing"/>
-            <input type="image" src="fruit.png" class="thing" id="fruit">
-            <input type="image" src="" class="body" id="0">
-            <input type="image" src="" class="body" id="1">
-            <input type="image" src="" class="body" id="2">
-            <input type="image" src="" class="body" id="3">
-            <input type="image" src="" class="body" id="4">
-            <input type="image" src="" class="body" id="5">
-            <input type="image" src="" class="body" id="6">
-            <input type="image" src="" class="body" id="7">
-            <input type="image" src="" class="body" id="8">
-            <input type="image" src="" class="body" id="9">
-            <input type="image" src="" class="body" id="10">
-            <input type="image" src="" class="body" id="11">
-            <input type="image" src="" class="body" id="12">
-            <input type="image" src="" class="body" id="13">
-            <input type="image" src="" class="body" id="14">
-            <input type="image" src="" class="body" id="15">
-            <input type="image" src="" class="body" id="16">
-            <input type="image" src="" class="body" id="17">
-            <input type="image" src="" class="body" id="18">
-            <input type="image" src="" class="body" id="19">
-            <input type="image" src="" class="body" id="20">
-            <input type="image" src="" class="body" id="21">
-            <input type="image" src="" class="body" id="22">
-            <input type="image" src="" class="body" id="23">
-            <input type="image" src="" class="body" id="24">
-            <input type="image" src="" class="body" id="25">
-            <input type="image" src="" class="body" id="26">
-            <input type="image" src="" class="body" id="27">
-            <input type="image" src="" class="body" id="28">
-            <input type="image" src="" class="body" id="29">
-            <div id="score" class="score">
-                Score:
+        <div style="display: flex;">
+            <div class="overlay" id="overlay">
+                <div id="start" style="display: inline; position: relative; font-size: 100px;"onclick="start()">
+                    Start
+                </div>
+            </div>
+            <div class="first-panel">
+                <canvas id="graph" class="plain">
+                </canvas>
+                <input type="image" src="C:\Users\MaximSaweljew\Pictures\Saved Pictures\snake-head.jfif" onkeyup="getKey(event)" id="playerhead" class="thing"/>
+                <input type="image" src="fruit.png" class="thing" id="fruit">
+            </div>
+            <div class="second-panel">
+                <div class="scoreboard">
+                    <div id="score" class="score">
+                        Score:
+                    </div>
+                    <div id="lastscore" class="score">
+                        Last score:
+                    </div>
+                    <div id="highscore" class="score">
+                        Highscore:
+                    </div>
+                    <div class="auto-button" onclick="auto()">
+                        Autopilot
+                    </div>
+                </div>
             </div>
         </div>
         <script src="snakecode.js"></script>
