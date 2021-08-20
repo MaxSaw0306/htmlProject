@@ -7,7 +7,7 @@
             Snake
         </title>
     </head>
-    <body>
+    <body onkeyup="getKey(event)">
         <div style="display: flex;">
             <div class="overlay" id="overlay">
                 <div id="start" style="display: inline; position: relative; font-size: 100px;"onclick="start()">
@@ -17,8 +17,9 @@
             <div class="first-panel">
                 <canvas id="graph" class="plain">
                 </canvas>
-                <input type="image" src="C:\Users\MaximSaweljew\Pictures\Saved Pictures\snake-head.jfif" onkeyup="getKey(event)" id="playerhead" class="thing"/>
-                <input type="image" src="fruit.png" class="thing" id="fruit">
+                <!-- onkeyup="getKey(event)"-->
+                <img src="C:\Users\MaximSaweljew\Pictures\Saved Pictures\snake-head.jfif" id="playerhead" class="thing"/>
+                <img src="fruit.png" class="thing" id="fruit">
             </div>
             <div class="second-panel">
                 <div class="scoreboard">
@@ -30,9 +31,6 @@
                     </div>
                     <div id="highscore" class="score">
                         Highscore:
-                    </div>
-                    <div class="auto-button" onclick="auto()">
-                        Autopilot
                     </div>
                 </div>
             </div>

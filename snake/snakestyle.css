@@ -1,13 +1,11 @@
 .page {
   display: flex;
-  z-index: auto;
 }
 
 .first-panel {
   border: 10px brown solid;
   background-color: #209720;
   margin: 0;
-  z-index: 1;
   width: fit-content;
 }
 
@@ -15,30 +13,11 @@
   display: flex;
   flex-direction: row;
   margin: 0;
-  z-index: 1;
-}
-
-.auto-button {
-  width: fit-content;
-  height: fit-content;
-  border: #504e4e;
-  background-color: grey;
-  font-size: 90px;
-}
-.auto-button:hover {
-  background-color: #b9b0b0;
 }
 
 .thing {
   position: absolute;
   margin: 0;
-  z-index: 2;
-}
-
-.thing2 {
-  position: absolute;
-  margin: 0;
-  z-index: 2;
   display: none;
 }
 
@@ -56,20 +35,17 @@
   background-color: #b0b0ff;
   align-items: center;
   font-size: 30px;
-  z-index: 1;
 }
 
 .overlay {
   position: absolute;
   display: flex;
   background-color: rgba(0, 0, 0, 0.521);
-  width: 920px;
-  height: 920px;
-  z-index: 3;
+  width: 1020px;
+  height: 1020px;
 }
 .overlay > div {
   color: white;
-  z-index: 4;
   transform: translate(370px, 370px);
 }
 
