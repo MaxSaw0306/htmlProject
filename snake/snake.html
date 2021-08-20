@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="snakestyle.css">
+        <link rel="shortcut icon" href="icon.png"/>
+        <meta charset="utf-8"/>
+        <title>
+            Snake
+        </title>
+    </head>
+    <body onkeyup="getKey(event)">
+        <div style="display: flex;">
+            <div class="overlay" id="overlay">
+                <div id="start" style="display: inline; position: relative; font-size: 100px;"onclick="start()">
+                    Start
+                </div>
+            </div>
+            <div class="first-panel">
+                <canvas id="graph" class="plain">
+                </canvas>
+                <!-- onkeyup="getKey(event)"-->
+                <img src="C:\Users\MaximSaweljew\Pictures\Saved Pictures\snake-head.jfif" id="playerhead" class="thing"/>
+                <img src="fruit.png" class="thing" id="fruit">
+            </div>
+            <div class="second-panel">
+                <div class="scoreboard">
+                    <div id="score" class="score">
+                        Score:
+                    </div>
+                    <div id="lastscore" class="score">
+                        Last score:
+                    </div>
+                    <div id="highscore" class="score">
+                        Highscore:
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="snakecode.js"></script>
+    </body>
+</html>

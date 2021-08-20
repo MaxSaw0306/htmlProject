@@ -1,0 +1,52 @@
+.page {
+  display: flex;
+}
+
+.first-panel {
+  border: 10px brown solid;
+  background-color: #209720;
+  margin: 0;
+  width: fit-content;
+}
+
+.second-panel {
+  display: flex;
+  flex-direction: row;
+  margin: 0;
+}
+
+.thing {
+  position: absolute;
+  margin: 0;
+  display: none;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: column;
+}
+
+.score {
+  display: flex;
+  height: 100px;
+  width: 400px;
+  min-width: fit-content;
+  color: red;
+  background-color: #b0b0ff;
+  align-items: center;
+  font-size: 30px;
+}
+
+.overlay {
+  position: absolute;
+  display: flex;
+  background-color: rgba(0, 0, 0, 0.521);
+  width: 1020px;
+  height: 1020px;
+}
+.overlay > div {
+  color: white;
+  transform: translate(370px, 370px);
+}
+
+/*# sourceMappingURL=snakestyle.css.map */
