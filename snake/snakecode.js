@@ -42,10 +42,6 @@ function drawSnake(snake) {
 let snake = {
     color: "rgb(255, 0, 0)",
     size: 100,
-    body: [{
-        xPosition:
-        yPosition:
-    }]
     xPosition: (canvasWidth-500),
     yPosition: (canvasHeight-500),
 }
