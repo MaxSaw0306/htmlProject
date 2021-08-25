@@ -1,14 +1,15 @@
 @mixin side-menu-part () {
     display: flex;
     flex-direction: column;
-    background-color: rgb(179, 210, 226);
+    background-color: transparent;
+    color: rgb(93, 196, 255);
     margin-bottom: 5px;
     text-align: center;
     font-size: larger;
     min-width: fit-content;
 
     &:hover {
-        background-color: rgb(189, 245, 255);
+        color: red;
     }
 }
 
@@ -20,6 +21,14 @@
     font-size: small;
 }
 
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
 .page {
     display: flex;
     flex-direction: row;
@@ -28,15 +37,20 @@
 }
 
 .side-menu {
-    position: absolute;
     display: none;
+    position: fixed;
+    top: 0;
+    left: -200;
     flex-direction: column;
     min-width: fit-content;
     width: 7%;
-    height: fit-content;
+    height: 100%;
     margin: 0;
     padding: 0;
     background-color: transparent;
+    z-index: 4;
+    flex: 1;
+    animation: side-menu-animation-open 1s forwards;
 
     & a {
         @include side-menu-part();
@@ -44,13 +58,17 @@
     }
 }
 
+.login-field {
+    display: none;
+}
+
 .login {
     @include side-menu-part();
-    & > :nth-child(1) {
+    & > :nth-chlid(1) {
         @include input-text();
     }
 
-    & > :nth-child(2) {
+    & > :nth-chlid(2) {
         @include input-text();
     }
 }
@@ -70,13 +88,33 @@
 }
 
 
-.side-menu-button {
+.side-menu-button2 {
+    display: block;
+    position: fixed;
+    top: 50;
+    left: 50;
+    width: 50px;
+    height: 50px;
+    font-size: xx-large;
+    background-color: transparent;
+    color: red;
+    border: none;
+    z-index: 5;
+
+    &:hover {
+        animation: buttonanimation 1s;
+    }
+}
+
+.side-menu-button1 {
     display: block;
     width: 50px;
     height: 50px;
     font-size: xx-large;
     background-color: transparent;
+    color: red;
     border: none;
+    z-index: 5;
 
     &:hover {
         animation: buttonanimation 1s;
@@ -86,19 +124,44 @@
 .content {
     width: 100%;
     height: 100%;
+    flex: 1;
 }
 
 .header {
     width: 100%;
     text-align: center;
+    z-index: 2;
 }
 
 .main-page {
+    margin: 0;
+    padding: 0;
     width: 100%;
-    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Fbackground-electronic-circuits-design-vector-21457819&psig=AOvVaw2kaFhMlSYI8V079dOfcoMS&ust=1629900060930000&source=images&cd=vfe&ved=0CAgQjRxqFwoTCKiBg4PpyfICFQAAAAAdAAAAABAJ");
+    height:50%;
+    z-index: 1;
+    text-align: center;
+}
+
+.footer {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 10%;
+}
+
+.contacts{
+    display: flex;
+    flex-direction: column;
+    bottom: 0;
+    margin-top: 90px;
 }
 
 @keyframes buttonanimation {
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
+}
+
+@keyframes side-menu-animation-open {
+    0% {left: -200};
+    100% {left: 0};
 }
