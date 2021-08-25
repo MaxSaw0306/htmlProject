@@ -1,0 +1,104 @@
+@mixin side-menu-part () {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(179, 210, 226);
+    margin-bottom: 5px;
+    text-align: center;
+    font-size: larger;
+    min-width: fit-content;
+
+    &:hover {
+        background-color: rgb(189, 245, 255);
+    }
+}
+
+@mixin input-text () {
+    margin-top: 5px;
+    margin-left: 5px;
+    height: 30px;
+    width: 70%;
+    font-size: small;
+}
+
+.page {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+}
+
+.side-menu {
+    position: absolute;
+    display: none;
+    flex-direction: column;
+    min-width: fit-content;
+    width: 7%;
+    height: fit-content;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+
+    & a {
+        @include side-menu-part();
+        height: 50px;
+    }
+}
+
+.login {
+    @include side-menu-part();
+    & > :nth-child(1) {
+        @include input-text();
+    }
+
+    & > :nth-child(2) {
+        @include input-text();
+    }
+}
+
+.log-buttons {
+    margin: 0;
+    padding: 0;
+    text-align: start;
+    
+    & >* {
+    height: 30px;
+    min-width: 60px;
+    width: fit-content;
+    margin-top: 5px;
+    margin-left: 5px;
+    }
+}
+
+
+.side-menu-button {
+    display: block;
+    width: 50px;
+    height: 50px;
+    font-size: xx-large;
+    background-color: transparent;
+    border: none;
+
+    &:hover {
+        animation: buttonanimation 1s;
+    }
+}
+
+.content {
+    width: 100%;
+    height: 100%;
+}
+
+.header {
+    width: 100%;
+    text-align: center;
+}
+
+.main-page {
+    width: 100%;
+    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vectorstock.com%2Froyalty-free-vector%2Fbackground-electronic-circuits-design-vector-21457819&psig=AOvVaw2kaFhMlSYI8V079dOfcoMS&ust=1629900060930000&source=images&cd=vfe&ved=0CAgQjRxqFwoTCKiBg4PpyfICFQAAAAAdAAAAABAJ");
+}
+
+@keyframes buttonanimation {
+    0% {transform: rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
