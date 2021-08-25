@@ -25,3 +25,7 @@ function loginOut() {
 function test() {
     document.getElementById("showLoginButton").style.display ="none";
 }
+
+function register() {
+    self.location ="google.com"
+}

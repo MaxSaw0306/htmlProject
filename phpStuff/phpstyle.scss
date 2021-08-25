@@ -156,6 +156,24 @@ a {
     margin-top: 90px;
 }
 
+.register {
+    display: flex;
+    flex-direction: column;
+    margin: 5% 40% 0;
+    width: 20%;
+    height: fit-content;
+    background-image: url(https://www.satellitetoday.com/wp-content/uploads/2019/06/Screen-Shot-2019-06-13-at-5.50.12-PM.png);
+
+    & > input {
+        margin: 2.5% 35% 2.5% 35%;
+        width: 30%;
+        height: 70px;
+        background-color: rgba(255, 255, 255, 0.185);
+        font-size: large;
+        color: white;
+    }
+}
+
 @keyframes buttonanimation {
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}

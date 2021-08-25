@@ -1,7 +1,19 @@
 <html>
     <head>
+        <?php
+            $servername = "localhost";
+            $username = "root";
+
+            // Create connection
+            $conn = new mysqli($servername, $username);
+
+            // Check connection
+            if ($conn->connect_error) {
+            die("Connection failed: " . $conn->connect_error);
+            }
+        ?>
         <title>
-            Mawels Homepage
+            Maxwels Homepage
         </title>
         <link rel="stylesheet" href="phpstyle.css"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
@@ -18,6 +30,7 @@
                         <input type="password" placeholder="Passwort" name="login-password"/>
                         <span class="log-buttons">
                             <input type="submit" value="Login"/>
+                            <input type="button" value="Registrieren" onclick="register()"/>
                             <?php
                                 if (isset($_GET['user']) && isset($_GET['login-password'])) {
                                     $name = $_GET['user'];
@@ -29,8 +42,6 @@
                                         header("Location: " . $_SERVER['SCRIPT_NAME']);
                                         http_response_code(400);
                                     }
-                                } else {
-                                    echo ('<input type="button" value="Registrieren" onclick="register()"/>');
                                 }
                             ?>
                         </span>
