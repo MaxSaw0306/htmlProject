@@ -29,3 +29,10 @@ function test() {
 function register() {
     self.location ="google.com"
 }
+
+function resizeWebsiteLogo() {
+    const windowInnerWidth  = document.documentElement.clientWidth;
+    const windowInnerHeight = document.documentElement.clientHeigh;
+    document.getElementById("websiteLogo").width = windowInnerWidth;
+    document.getElementById("websiteLogo").height = windowInnerHeight;
+}

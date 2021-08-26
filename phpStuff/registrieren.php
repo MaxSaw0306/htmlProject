@@ -37,10 +37,29 @@
                 $mail = $_GET['email'];
                 $password1 = $_GET['password1'];
                 $password2 = $_GET['password2'];
+                $mailtest = 0;
+                $nametest = 0;
+                if (strlen($name) != 0 || strlen($mail) != 0 || strlen($password1) != 0 || strlen($password2) != 0 ) {
+                    if($password1 == $password2) {
+                        $sqlTestUsername = "SELECT EXISTS `Username` from `user` WHERE `Username` = '$name';";
+                        $TestUSername=$conn->query($sqlTestUsername);
+                        $sqlTestMail = "SELECT EXISTS `Email` from `user` WHERE `Email` = '$mail';";
+                        $TestMail=$conn->query($sqlTestMail);
+                        if(strlen($TestUSername) == $name) {
+                            $nametest=1;
+                            echo("Dieser Name ist bereits vergeben!");
+                        }
 
-                if($password == $password2) {
-                    $sql = "'INSERT INTO user (ID, Username, 'Password', Email, 'Date of creation')
-                    VALUES ($name, $password1, $mail, 2021-08-25)'";
+                        if(strlen($TestMail) == $mail) {
+                            $mailtest=1;
+                            echo("Dieser Account existiert bereits!");
+                        }
+
+                        if ($mailtest + $nametest == 0 ) {
+                            $sql = "INSERT INTO user (Username, Password, Email) VALUES ('$name', '$password1', '$mail')";
+                            $conn->query($sql);
+                        }
+                    } 
                 }
             }
         ?>
