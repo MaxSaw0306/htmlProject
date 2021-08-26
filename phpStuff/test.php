@@ -11,6 +11,8 @@
             if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
             }
+            $nametest = 0;
+            $passtest = 0;
         ?>
         <title>
             Maxwels Homepage
@@ -24,23 +26,51 @@
     <body>
         <div class="page">
             <ul class="side-menu" id="sideMenu">
+                <li class="login-field" id="loginField">
+                    <form class="login">
+                        <input type="text" placeholder="Benutzername" name="user"/>
+                        <input type="password" placeholder="Passwort" name="login-password"/>
+                        <span class="log-buttons">
+                            <input type="submit" value="Login"/>
+                            <input type="button" value="Registrieren" onclick="register()"/>
+                            <?php
+                                if (isset($_GET['user']) && isset($_GET['login-password'])) {
+                                    $name = $_GET['user'];
+                                    $password = $_GET['login-password'];
 
+                                    $sqlTestUsername = "SELECT IF EXISTS `Username` from `user` WHERE `Username` = '$name';";
+                                    $TestUSername=$conn->query($sqlTestUsername);
+                                    $sqlTestPass = "SELECT IF EXISTS `Password` from `user` WHERE `Password` = '$password';";
+                                    var_dump($conn->connect_error);
+                                    $TestPass=$conn->query($sqlTestPass);
+                                    if($TestUSername != $name) {
+                                        $nametest=1;
+                                    }
+
+                                    if($TestPass != $password) {
+                                        $passtest=1;
+                                    }
+                                    if ($passtest + $nametest == 2 ) {
+                                        echo('<script>loginOut()</script>');
+                                    } else {
+                                        header("Location: " . $_SERVER['SCRIPT_NAME']);
+                                        http_response_code(400);
+                                    }
+                                }
+                            ?>
+                        </span>
+                    </form>
+                </li>
                 <li>
                     <a onclick="showLogin()" id="showLoginButton">
                         Login
                     </a>
                 </li>
                 <?php
-                    if (isset($_GET['user']) && isset($_GET['login-password'])) {
-                        $name = $_GET['user'];
-                        $password = $_GET['login-password'];
-                        if ($name == "M.Saweljew") {
-                            if ($password == "Test123") {
-                                echo('<script>test()</script>');
-                                echo ('<li> <a id="proflie"> Profli </a> </li>');
-                                echo('<li><a onclick="logout()"> Logout </a></li>');
-                            }
-                        }
+                    if ($passtest + $nametest == 2 ) {
+                        echo('<script>test()</script>');
+                        echo ('<li> <a id="proflie"> Profli </a> </li>');
+                        echo('<li><a onclick="logout()"> Logout </a></li>');
                     }
                 ?>
                 <li>

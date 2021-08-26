@@ -27,7 +27,7 @@ function test() {
 }
 
 function register() {
-    self.location ="google.com"
+    self.location ="registrieren.php"
 }
 
 function resizeWebsiteLogo() {

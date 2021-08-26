@@ -127,10 +127,14 @@ a {
 }
 
 .header {
-    width: 10%;
+    width: 100%;
     text-align: center;
     z-index: 2;
-    height: 1440px;
+
+    & img {
+        aspect-ratio: auto 2541 / 1440;
+        height: 1440px;
+    }
 }
 
 .main-page {
