@@ -41,21 +41,36 @@
                 $nametest = 0;
                 if (strlen($name) != 0 || strlen($mail) != 0 || strlen($password1) != 0 || strlen($password2) != 0 ) {
                     if($password1 == $password2) {
-                        $sqlTestUsername = "SELECT EXISTS `Username` from `user` WHERE `Username` = '$name';";
-                        $TestUSername=$conn->query($sqlTestUsername);
-                        $sqlTestMail = "SELECT EXISTS `Email` from `user` WHERE `Email` = '$mail';";
+                        $sqlTestUsername = "SELECT `Username` from `user` WHERE `Username` = '$name';";
+                        $TestUsername=$conn->query($sqlTestUsername);
+                        $sqlTestMail = "SELECT `Email` from `user` WHERE `Email` = '$mail';";
                         $TestMail=$conn->query($sqlTestMail);
-                        if(strlen($TestUSername) == $name) {
-                            $nametest=1;
+                        $testUserUniqe=0;
+                        $testMailUniqe=0;
+                        while($row = mysqli_fetch_assoc($TestUsername)) {
+                            if($row["Username"] == $name) {
+                                $testUserUniqe = TRUE;
+                                break;
+                            }
+                        }
+
+                        while($row = mysqli_fetch_assoc($TestMail)) {
+                            if($row["Email"] == $mail) {
+                                $testMailUniqe = TRUE;
+                                break;
+                            }
+                        }
+
+
+                        if($test == TRUE) {
                             echo("Dieser Name ist bereits vergeben!");
                         }
 
-                        if(strlen($TestMail) == $mail) {
-                            $mailtest=1;
+                        if($test2 == TRUE) {
                             echo("Dieser Account existiert bereits!");
                         }
 
-                        if ($mailtest + $nametest == 0 ) {
+                        if ($test + $test2 == 0 ) {
                             $sql = "INSERT INTO user (Username, Password, Email) VALUES ('$name', '$password1', '$mail')";
                             $conn->query($sql);
                         }

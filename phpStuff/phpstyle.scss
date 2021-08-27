@@ -21,6 +21,9 @@
     font-size: small;
 }
 
+$color: rgba(255, 255, 255, 0.185);
+$border: #85cbff outset 4px;
+
 body {
     margin: 0;
 }
@@ -31,9 +34,10 @@ a {
 
 .page {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     height: 100%;
     width: 100%;
+    min-height: 0;
 }
 
 .side-menu {
@@ -47,10 +51,9 @@ a {
     height: 100%;
     margin: 0;
     padding: 0;
-    background-color: transparent;
+    background-color: white;
     z-index: 4;
     flex: 1;
-    animation: side-menu-animation-open 0.25s forwards;
 
     & a {
         @include side-menu-part();
@@ -123,7 +126,6 @@ a {
 
 .content {
     width: 100%;
-    height: 100%;
 }
 
 .header {
@@ -132,8 +134,8 @@ a {
     z-index: 2;
 
     & img {
-        aspect-ratio: auto 2541 / 1440;
-        height: 1440px;
+        aspect-ratio: auto 2541 / 884;
+        height: 884px;
     }
 }
 
@@ -141,9 +143,7 @@ a {
     margin: 0;
     padding: 0;
     width: 100%;
-    height:50%;
     z-index: 1;
-    text-align: center;
 }
 
 .footer {
@@ -151,6 +151,13 @@ a {
     flex-direction: row;
     width: 100%;
     height: 200px;
+    background-color: white;
+}
+
+.spacer {
+    width: 100%;
+    padding: 150px 0 150px 0;
+    text-align: center;
     background-color: white;
 }
 
@@ -173,7 +180,7 @@ a {
         margin: 2.5% 35% 2.5% 35%;
         width: 30%;
         height: 70px;
-        background-color: rgba(255, 255, 255, 0.185);
+        background-color: $color;
         font-size: large;
         color: white;
     }
@@ -182,32 +189,63 @@ a {
 .statistic {
     display: flex;
     flex-direction: row;
-    margin-top: 2%;
-    margin-left: 7%;
-
+    text-align: center;
+    align-items: center;
+    height: 583px;
+    background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701515213.jpg);
+    max-height: 538px;
     & > div {
         min-width: fit-content;
         width: 27%;
         height: 330px;
-        background-color:#85cbff;
+        background-color: $color;
         margin-left: 3%;
-        border: #85cbff outset 4px;
+        border: $border;
+        color: white;
 
         &:hover {
             animation: stat-block 0.25s forwards;
         }
 
     }
+
+    & > span {
+        display: block;
+        max-width: 100px;
+
+    }
 }
+
+.news-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701515213.jpg);
+    width: 100%;
+    height: 600px;
+    color: white;
+}
+
+.news {
+    border: $border;
+    margin-left: 100px;
+    background-color: $color;
+    &:hover {
+        animation: stat-block 0.25s forwards;
+    }
+}
+
+.news-panel {
+    margin: 50 100 100 50;
+}
+
+
+
+
 
 @keyframes buttonanimation {
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
-}
-
-@keyframes side-menu-animation-open {
-    0% {left: -200};
-    100% {left: 0};
 }
 
 @keyframes stat-block {

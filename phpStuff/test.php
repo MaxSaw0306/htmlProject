@@ -2,20 +2,21 @@
     <head>
         <?php
             $servername = "localhost";
-            $username = "root";
+            $username = "Master";
+            $password = "8vOCmO7GYNgiovSH";
+            $dbname ="maxwels";
 
             // Create connection
-            $conn = new mysqli($servername, $username);
+            $conn = new mysqli($servername, $username, $password, $dbname);
 
             // Check connection
             if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
             }
-            $nametest = 0;
-            $passtest = 0;
+            $test = 0;
         ?>
         <title>
-            Maxwels Homepage
+            Maxwels
         </title>
         <link rel="stylesheet" href="phpstyle.css"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
@@ -38,20 +39,24 @@
                                     $name = $_GET['user'];
                                     $password = $_GET['login-password'];
 
-                                    $sqlTestUsername = "SELECT IF EXISTS `Username` from `user` WHERE `Username` = '$name';";
+                                    $sqlTestUsername = "SELECT `Username` from `user` WHERE `Username` = '$name';";
                                     $TestUSername=$conn->query($sqlTestUsername);
-                                    $sqlTestPass = "SELECT IF EXISTS `Password` from `user` WHERE `Password` = '$password';";
-                                    var_dump($conn->connect_error);
+                                    $sqlTestPass = "SELECT `Password` from `user` WHERE `Username` = '$name';";
                                     $TestPass=$conn->query($sqlTestPass);
-                                    if($TestUSername != $name) {
-                                        $nametest=1;
+                                    $test = 0;
+                                    while($row = mysqli_fetch_assoc($TestUSername)) {
+                                        if($row["Username"] == $name) {
+                                            while($row = mysqli_fetch_assoc($TestPass)) {
+                                                if($row["Password"] == $password) {
+                                                    echo('<script>loginOut()</script>');
+                                                    $test=2;
+                                                    break;
+                                                }
+                                            }
+                                        }
                                     }
-
-                                    if($TestPass != $password) {
-                                        $passtest=1;
-                                    }
-                                    if ($passtest + $nametest == 2 ) {
-                                        echo('<script>loginOut()</script>');
+                                    
+                                    if ($test == 2 ) {
                                     } else {
                                         header("Location: " . $_SERVER['SCRIPT_NAME']);
                                         http_response_code(400);
@@ -67,7 +72,7 @@
                     </a>
                 </li>
                 <?php
-                    if ($passtest + $nametest == 2 ) {
+                    if ($test == 2 ) {
                         echo('<script>test()</script>');
                         echo ('<li> <a id="proflie"> Profli </a> </li>');
                         echo('<li><a onclick="logout()"> Logout </a></li>');
@@ -75,22 +80,22 @@
                 ?>
                 <li>
                     <a>
-                        Neuigkeiten
+                        About Me
+                    </a>
+                </li>
+                <li>
+                    <a href="#news">
+                        News
                     </a>
                 </li>
                 <li>
                     <a>
-                        Produkte
-                    </a>
-                </li>
-                <li>
-                    <a>
-                        Über mich
+                        Products
                     </a>
                 </li>
                 <li>
                     <a href="#contacts">
-                        Kontakt
+                        Contacts
                     </a>
                 </li>
                 <li>
@@ -99,19 +104,22 @@
                     </button>
                 </li>
             </ul>
+
+            <div class="header">
+                <img id="websiteLogo" src="maxwel_cover (2).jpg" width="100%"/>
+                <button style="top: 0" class="side-menu-button2" id="smButton" onclick="openSideMenu()">
+                    X
+                </button>
+            </div>
+            <div class="spacer">
+                <h1> A Programmer you can trust! </h1>
+            </div>
             <div class="content">
-                <div class="header">
-                    <img id="websiteLogo" src="maxwel_cover.jpg" width="100%" height="1440px"/>
-                    <script>resizeWebsiteLogo()</script>
-                    <button style="top: 0" class="side-menu-button2" id="smButton" onclick="openSideMenu()">
-                        X
-                    </button>
-                </div>
                 <div class="main-page">
                     <div class="statistic">
 
                         <div>
-                            <h2> Über mich </h2>
+                            <h2> About Me </h2>
                             <p> 
                                 Ich heiße Maxim Saweljew unf bin ein eigenständiger Entwickler. <br>
                                 Das Programmieren habe ich während meines Fachabitures für mich entdeckt.<br>
@@ -130,10 +138,10 @@
                         </div>
                         
                         <div>
-                            <h4> Erledigte Aufträge </h4>
+                            <h4> Jobs</h4>
                             <?php
                                 $number = 5;
-                                echo('<p>' . $number . ' Aufträge erledigt</p>');
+                                echo('<p>' . $number . ' jobs</p>');
                             ?>
                         </div>
 
@@ -144,23 +152,72 @@
                                 $customersHappy = 5;
 
                                 $rating=(round(($customersHappy / $customers)*100));
-                                echo('<p>' . $rating . '%  Zufriedenheistrate </p>');
+                                echo('<p>' . $rating . '%  satisfaction rate </p>');
                             ?>
                         </div>
-
                     </div>
-                    <div>
+                    <div class="spacer">
+                        <h1> What happend and What will happen </h1>
+                    </div>
+                    <div class="news-container" id="news">
+                        <div class="news">
+                            <div class="news-panel">
+                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                <h3> First Post </h3>
+                                _________________________
+                                <h4> Text </h4>
+                            </div>
+                        </div>
 
+                        <div class="news">
+                            <div class="news-panel">
+                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                <h3> Second Post </h3>
+                                _________________________
+                                <h4> Text </h4>
+                            </div>
+                        </div>
+
+                        <div class="news">
+                            <div class="news-panel">
+                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                <h3> Third Post </h3>
+                                _________________________
+                                <h4> Text </h4>
+                            </div>
+                        </div>
+
+                        <div class="news">
+                            <div class="news-panel">
+                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                <h3> Fourth Post </h3>
+                                _________________________
+                                <h4> Text </h4>
+                            </div>
+                        </div>
+
+                        <div class="news">
+                            <div class="news-panel">
+                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                <h3> Fifth Post </h3>
+                                _________________________
+                                <h4> Text </h4>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="footer">
-                    <img src="smaller_icon.png" width="200" height="200" />
-                    <div class="contacts" id="contacts">
-                        <p> Copyright © Maxwels 2021 </p>
-                        <p> maxwels-programming@gmail.com </p>
-                        <p> Tel: 2365/424523542625 </p>
-                    </div>
+            </div>
+            <div class="spacer">
+                <h1> How can You contact me </h1>
+            </div>
+            <div class="footer">
+                <img src="smaller_icon.png" width="200" height="200" />
+                <div class="contacts" id="contacts">
+                    <p> Copyright © Maxwels 2021 </p>
+                    <p> maxwels-programming@gmail.com </p>
+                    <p> Tel: 2365/424523542625 </p>
                 </div>
+                
             </div>
         </div>
     </body>

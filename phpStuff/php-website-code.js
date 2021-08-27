@@ -1,11 +1,38 @@
 function openSideMenu() {
+    var elem = document.getElementById("sideMenu");
+    var pos = -200;
+    var id;
+    clearInterval(id);
+    id = setInterval(frame, 1);
+    function frame() {
+        if (pos > 0) {
+        clearInterval(id);
+        } else {
+        pos+=3;
+        elem.style.left = pos + 'px';
+        }
+    }
+
     document.getElementById("smButton").style.display = "none";
     document.getElementById("sideMenu").style.display = "flex";
 }
 
 function closeSideMenu() {
+    var elem = document.getElementById("sideMenu");
+    var pos = 0;
+    var id;
+    clearInterval(id);
+    id = setInterval(frame, 1);
+    function frame() {
+        if (pos < -200) {
+        clearInterval(id);
+        } else {
+        pos-=3;
+        elem.style.left = pos + 'px';
+        }
+    }
+
     document.getElementById("smButton2").style.display = "block";
-    document.getElementById("sideMenu").style.display = "none";
     document.getElementById("smButton").style.display = "block";
 }
 
