@@ -194,7 +194,7 @@ a {
         min-width: fit-content;
         width: 27%;
         height: 330px;
-        background-color: $color;
+        background-image: url(field_bg.png);
         margin-left: 3%;
         border: $border;
         color: #85cbff;
@@ -237,7 +237,7 @@ a {
 .news {
     border: $border;
     margin-left: 100px;
-    background-color: $color;
+    background-image: url(field_bg.png);
     min-width: 358px;
     min-height: 195px;
 
@@ -248,7 +248,7 @@ a {
     & h4 {
         display: none;
     }
-
+    
     & img {
         display: none;
     }
@@ -278,7 +278,9 @@ a {
     margin: 50 100 100 50;
 }
 
-
+@media body {
+    
+}
 
 
 

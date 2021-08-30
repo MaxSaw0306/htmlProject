@@ -157,49 +157,51 @@
                     <div class="spacer">
                         <h1> What happend and What will happen </h1>
                     </div>
-                    <div class="news-container" id="news">
-                        <div class="news">
-                            <div class="news-panel">
-                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h1> First Post </h1>
-                                <p>_________________________</p>
-                                <h4> Text </h4>
+                    <div class="news-overlay">
+                        <div class="news-container" id="news">
+                            <div class="news">
+                                <div class="news-panel">
+                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <h1> First Post </h1>
+                                    <p>_________________________</p>
+                                    <h4> Text </h4>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="news">
-                            <div class="news-panel">
-                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h1> Second Post </h1>
-                                <p>_________________________</p>
-                                <h4> Text </h4>
+                            <div class="news">
+                                <div class="news-panel">
+                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <h1> Second Post </h1>
+                                    <p>_________________________</p>
+                                    <h4> Text </h4>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="news">
-                            <div class="news-panel">
-                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h1> Third Post </h1>
-                                <p>_________________________</p>
-                                <h4> Text </h4>
+                            <div class="news">
+                                <div class="news-panel">
+                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <h1> Third Post </h1>
+                                    <p>_________________________</p>
+                                    <h4> Text </h4>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="news">
-                            <div class="news-panel">
-                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h1> Fourth Post </h1>
-                                <p>_________________________</p>
-                                <h4> Text </h4>
+                            <div class="news">
+                                <div class="news-panel">
+                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <h1> Fourth Post </h1>
+                                    <p>_________________________</p>
+                                    <h4> Text </h4>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="news">
-                            <div class="news-panel">
-                                <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h1> Fifth Post </h1>
-                                <p>_________________________</p>
-                                <h4> Text </h4>
+                            <div class="news">
+                                <div class="news-panel">
+                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <h1> Fifth Post </h1>
+                                    <p>_________________________</p>
+                                    <h4> Text </h4>
+                                </div>
                             </div>
                         </div>
                     </div>
