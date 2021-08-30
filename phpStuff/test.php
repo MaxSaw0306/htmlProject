@@ -58,7 +58,7 @@
                                     
                                     if ($test == 2 ) {
                                     } else {
-                                        header("Location: " . $_SERVER['SCRIPT_NAME']);
+                                        echo('<script/>logout()</script>');
                                         http_response_code(400);
                                     }
                                 }
@@ -89,11 +89,6 @@
                     </a>
                 </li>
                 <li>
-                    <a>
-                        Products
-                    </a>
-                </li>
-                <li>
                     <a href="#contacts">
                         Contacts
                     </a>
@@ -106,11 +101,11 @@
             </ul>
 
             <div class="header">
-                <img class="website-logo" id="websiteLogo" src="maxwel_cover (2).jpg" width="100%"/>
+                <img id="websiteLogo" src="maxwel_cover (2).jpg" width="100%"/>
                 <img style="top: 0" class="side-menu-button2" id="smButton" onmouseover="openSideMenu()" src="menu.png" height="50px" width="100px"/>
             </div>
             <div class="spacer">
-                <h1> A Programmer you can trust! </h1>
+                <p> A Programmer you can trust! </p>
             </div>
             <div class="content">
                 <div class="main-page">
@@ -119,19 +114,7 @@
                         <div>
                             <h1> About Me </h1>
                             <p> 
-                                Ich heiße Maxim Saweljew unf bin ein eigenständiger Entwickler. <br>
-                                Das Programmieren habe ich während meines Fachabitures für mich entdeckt.<br>
-                                Dort habe ich mit Python meine ersten Erfahrungen sammeln können,und <br>
-                                es wurde schnell zu einem Hobby das viel Zeit in anspruch nahm.<br>
-                                Nach meinem Fachabi habe eine Ausbildung in Fachinformatik für <br>
-                                Anwendungsentwicklung bei der Firma Venabo GmbH gemacht. Dort lernte <br>
-                                ich die Webentwicklung kennen. Lernte Html, Javascript und CSS, als auch <br>
-                                PHP sowie SCSS. Es machte von Anfang an viel spaß. Hier stieß ich in <br>
-                                der vierten Woche meiner Ausbildung zum ersten mal an ein Problem was <br>
-                                für mich unlösbar erschien: Ich scheiterte daran Snake in JS zu programmieren <br>
-                                Ich habe lange daran gesessen, bis mir gesagt wurde das ich andere Prioritäten <br>
-                                habe, also legte ich es schweren Herzens zur Seite. Doch am (Datum einfügen) <br>
-                                bewältigte ich das Problem und beendete dieses Projekt.<br>
+                                Text
                             </p>
                         </div>
                         
@@ -155,16 +138,15 @@
                         </div>
                     </div>
                     <div class="spacer">
-                        <h1> What happend and What will happen </h1>
+                        <p> What happend and What will happen </p>
                     </div>
                     <div class="news-overlay">
                         <div class="news-container" id="news">
-                            <div class="news">
+                            <div class="news" id="news1" onmouseover="blockAnimation('news1')" onmouseout="blockAnimationEnd()">
                                 <div class="news-panel">
                                     <img src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> First Post </h1>
-                                    <p>_________________________</p>
-                                    <h4> Text </h4>
+                                    <p> Text </p>
                                 </div>
                             </div>
 
@@ -172,8 +154,7 @@
                                 <div class="news-panel">
                                     <img src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Second Post </h1>
-                                    <p>_________________________</p>
-                                    <h4> Text </h4>
+                                    <p> Text </p>
                                 </div>
                             </div>
 
@@ -181,8 +162,7 @@
                                 <div class="news-panel">
                                     <img src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Third Post </h1>
-                                    <p>_________________________</p>
-                                    <h4> Text </h4>
+                                    <p> Text </p>
                                 </div>
                             </div>
 
@@ -190,8 +170,7 @@
                                 <div class="news-panel">
                                     <img src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Fourth Post </h1>
-                                    <p>_________________________</p>
-                                    <h4> Text </h4>
+                                    <p> Text </p>
                                 </div>
                             </div>
 
@@ -199,8 +178,7 @@
                                 <div class="news-panel">
                                     <img src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Fifth Post </h1>
-                                    <p>_________________________</p>
-                                    <h4> Text </h4>
+                                    <p> Text </p>
                                 </div>
                             </div>
                         </div>
@@ -208,7 +186,7 @@
                 </div>
             </div>
             <div class="spacer">
-                <h1> How You can contact me </h1>
+                <p> How You can contact me </p>
             </div>
             <div class="footer">
                 <img src="smaller_icon.png" width="200" height="200" />

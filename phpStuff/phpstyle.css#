@@ -234,34 +234,40 @@ a {
   border: #111213 outset 4px;
   margin-left: 100px;
   background-image: url(field_bg.png);
-  width: 366px;
-  height: 203px;
-  transition: 1s;
-  /*&:hover p {
-      animation: appear-delay 1s forwards;
-  }
-
-  &:hover img {
-      animation: appear-delay 1s forwards;
-  }
-
-  &:hover h1 {
-      animation: appear-delay 1s forwards;
-  } */
+  width: 358px;
+  height: calc(100%);
+  min-height: 195px;
 }
 .news p {
+  display: none;
+}
+.news h4 {
   display: none;
 }
 .news img {
   display: none;
 }
 .news:hover {
-  height: 100%;
-  animation: stat-block 0.5s forwards;
+  animation: stat-block 0.25s forwards;
+}
+.news:hover p {
+  display: block;
+}
+.news:hover img {
+  display: block;
+}
+.news:hover h1 {
+  display: none;
 }
 
 .news-panel {
   margin: 50 100 100 50;
+  transition: 10s;
+  height: 100%;
+}
+
+.news-panel:hover {
+  height: 100%;
 }
 
 @media (max-width: 600px) {
@@ -278,20 +284,12 @@ a {
   }
 }
 @keyframes stat-block {
-  from {
+  0% {
     border-width: 5px;
   }
-  to {
+  100% {
     border-width: 10px;
   }
 }
-@keyframes appear-delay {
-  from {
-    display: none;
-  }
-  to {
-    display: block;
-  }
-}
 
-/*# sourceMappingURL=phpstyle.css.map */
+/*# sourceMappingURL=phpstyle.css%23.map */
