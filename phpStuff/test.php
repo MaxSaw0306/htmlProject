@@ -74,12 +74,12 @@
                 <?php
                     if ($test == 2 ) {
                         echo('<script>test()</script>');
-                        echo ('<li> <a id="proflie"> Profli </a> </li>');
+                        echo ('<li> <a id="job"> Jobs </a> </li>');
                         echo('<li><a onclick="logout()"> Logout </a></li>');
                     }
                 ?>
                 <li>
-                    <a>
+                    <a href="#statistic">
                         About Me
                     </a>
                 </li>
@@ -99,27 +99,25 @@
                     </a>
                 </li>
                 <li>
-                    <button class="side-menu-button1" id="smButton2" onclick="closeSideMenu()">
+                    <button class="side-menu-button1" id="smButton2" onclick="closeSideMenu()"/>
                         X
                     </button>
                 </li>
             </ul>
 
             <div class="header">
-                <img id="websiteLogo" src="maxwel_cover (2).jpg" width="100%"/>
-                <button style="top: 0" class="side-menu-button2" id="smButton" onclick="openSideMenu()">
-                    X
-                </button>
+                <img class="website-logo" id="websiteLogo" src="maxwel_cover (2).jpg" width="100%"/>
+                <img style="top: 0" class="side-menu-button2" id="smButton" onmouseover="openSideMenu()" src="menu.png" height="50px" width="100px"/>
             </div>
             <div class="spacer">
                 <h1> A Programmer you can trust! </h1>
             </div>
             <div class="content">
                 <div class="main-page">
-                    <div class="statistic">
+                    <div class="statistic" id="statistic">
 
                         <div>
-                            <h2> About Me </h2>
+                            <h1> About Me </h1>
                             <p> 
                                 Ich heiße Maxim Saweljew unf bin ein eigenständiger Entwickler. <br>
                                 Das Programmieren habe ich während meines Fachabitures für mich entdeckt.<br>
@@ -138,7 +136,7 @@
                         </div>
                         
                         <div>
-                            <h4> Jobs</h4>
+                            <h1> Jobs</h1>
                             <?php
                                 $number = 5;
                                 echo('<p>' . $number . ' jobs</p>');
@@ -146,7 +144,7 @@
                         </div>
 
                         <div>
-                            <h4> Rating </h4>
+                            <h1> Rating </h1>
                             <?php
                                 $customers = 6;
                                 $customersHappy = 5;
@@ -163,8 +161,8 @@
                         <div class="news">
                             <div class="news-panel">
                                 <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h3> First Post </h3>
-                                _________________________
+                                <h1> First Post </h1>
+                                <p>_________________________</p>
                                 <h4> Text </h4>
                             </div>
                         </div>
@@ -172,8 +170,8 @@
                         <div class="news">
                             <div class="news-panel">
                                 <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h3> Second Post </h3>
-                                _________________________
+                                <h1> Second Post </h1>
+                                <p>_________________________</p>
                                 <h4> Text </h4>
                             </div>
                         </div>
@@ -181,8 +179,8 @@
                         <div class="news">
                             <div class="news-panel">
                                 <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h3> Third Post </h3>
-                                _________________________
+                                <h1> Third Post </h1>
+                                <p>_________________________</p>
                                 <h4> Text </h4>
                             </div>
                         </div>
@@ -190,8 +188,8 @@
                         <div class="news">
                             <div class="news-panel">
                                 <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h3> Fourth Post </h3>
-                                _________________________
+                                <h1> Fourth Post </h1>
+                                <p>_________________________</p>
                                 <h4> Text </h4>
                             </div>
                         </div>
@@ -199,8 +197,8 @@
                         <div class="news">
                             <div class="news-panel">
                                 <img src="logo_icon_inverted.png" height="100px" width="100px"/>
-                                <h3> Fifth Post </h3>
-                                _________________________
+                                <h1> Fifth Post </h1>
+                                <p>_________________________</p>
                                 <h4> Text </h4>
                             </div>
                         </div>
@@ -208,7 +206,7 @@
                 </div>
             </div>
             <div class="spacer">
-                <h1> How can You contact me </h1>
+                <h1> How You can contact me </h1>
             </div>
             <div class="footer">
                 <img src="smaller_icon.png" width="200" height="200" />
