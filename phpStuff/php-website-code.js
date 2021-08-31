@@ -1,3 +1,7 @@
+"use strict";
+
+let to;
+
 function openSideMenu() {
     var elem = document.getElementById("sideMenu");
     var pos = -200;
@@ -24,7 +28,7 @@ function closeSideMenu() {
     clearInterval(id);
     id = setInterval(frame, 1);
     function frame() {
-        if (pos < -200) {
+        if (pos < -207) {
         clearInterval(id);
         } else {
         pos-=3;
@@ -43,7 +47,6 @@ function showLogin() {
 
 function logout() {
     self.location = "http://localhost/htmlProject/phpStuff/test.php";
-    console.log("sd")
 }
 
 function loginOut() {
@@ -67,48 +70,82 @@ function resizeWebsiteLogo() {
 
 
 //Animations
-function blockAnimationEnd(id) {
-    let width = document.getElementById(id).style.width;
-    let height = document.getElementById(id).style.height;
-    let maxSize = 380;
+function newsBlockOpen(id) {
+    const element = (document.getElementById(id));
+    const styles = getComputedStyle(element);
+
+    let width = styles.getPropertyValue('width');
+    let height = styles.getPropertyValue('height');
+    let maxSize = 400;
+    height = parseInt(height, 10);
+    width = parseInt(width, 10);
+    const speed = 5;
+    function showContent() {
+        if(id < 6){
+            document.getElementById(id*10).style.display = "block";
+            document.getElementById(id*10+1).style.display = "block";
+        }else {
+            document.getElementById(id*10).style.display = "none";
+            document.getElementById(id*10+1).style.display = "block";
+        }
+    }
 
     let int = setInterval(frame, 1);
     function frame() {
-        if(height<maxSize && width<maxSize) {
+        if(width<maxSize) {
             document.getElementById(id).style.width = width;
-            width+=1;
+            width+=speed;
+        }
+
+        if (height<maxSize) {
             document.getElementById(id).style.height = height;
-            height+=1;
-        }else { 
+            height+=speed;
+        }
+
+        if (height >= maxSize && width >= maxSize) {
             clearInterval(int);
+            to = setTimeout(showContent, 500);
         }
     }
 }
 
-function blockAnimationEnd(num) {
-    let id = parseInt(num);
-    let width = document.getElementById(id).style.width;
-    let height = document.getElementById(id).style.height;
-    let finalWidth = 366;
-    let finalHeight = 203;
 
-    let int = setInterval(frame, 10);
+function newsBlockClose(id) {
+    clearTimeout(to)
+    const element = (document.getElementById(id));
+    const styles = getComputedStyle(element);
+
+    let width = styles.getPropertyValue('width');
+    let height = styles.getPropertyValue('height');
+    let maxWidth = 365;
+    let maxHeight = 205;
+    height = parseInt(height, 10);
+    width = parseInt(width, 10);
+    const speed = 5;
+    if (height <=400){
+        if (id < 6) {
+            document.getElementById(id*10).style.display = "none"
+            document.getElementById(id*10+1).style.display = "none"
+        }else{
+            document.getElementById(id*10).style.display = "block"
+            document.getElementById(id*10+1).style.display = "none"
+        }
+    }
+    
+    let int = setInterval(frame, 1);
     function frame() {
-        if(height>finalHeight && width<finalWidth) {
+        if(width>maxWidth) {
             document.getElementById(id).style.width = width;
-            width-=1;
+            width-=speed;
+        }
+
+        if (height>maxHeight) {
             document.getElementById(id).style.height = height;
-            height-=1;
-        }else { 
+            height-=speed;
+        }
+
+        if (height <= maxHeight && width <= maxWidth) {
             clearInterval(int);
         }
     }
-    function appear(id2) {
-        document.getElementById(id2+1).style.display = "block";
-        document.getElementById(id2+2).style.display = "block";
-        document.getElementById(id2+3).style.display = "block";
-    }
-
-    let id2 = parseInt(id)
-    setTimeout(appear(id2*10), 1000);
 }

@@ -14,11 +14,12 @@
             die("Connection failed: " . $conn->connect_error);
             }
             $test = 0;
+            $loggedIn = 0;
         ?>
         <title>
             Maxwels
         </title>
-        <link rel="stylesheet" href="phpstyle.css"/>
+        <link rel="stylesheet" href="phpstyle.css?no-cache"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
         <script src="php-website-code.js">
         </script>
@@ -29,12 +30,14 @@
             <ul class="side-menu" id="sideMenu">
                 <li class="login-field" id="loginField">
                     <form class="login">
-                        <input type="text" placeholder="Benutzername" name="user"/>
-                        <input type="password" placeholder="Passwort" name="login-password"/>
+                        <input type="text" placeholder="Username" name="user"/>
+                        <input type="password" placeholder="Password" name="login-password"/>
                         <span class="log-buttons">
                             <input type="submit" value="Login"/>
-                            <input type="button" value="Registrieren" onclick="register()"/>
+                            <input type="button" value="Register" onclick="register()"/>
+                            <input type="button" value="Cancel" onclick="logout()"/>
                             <?php
+                                $loggedIn = 0;
                                 if (isset($_GET['user']) && isset($_GET['login-password'])) {
                                     $name = $_GET['user'];
                                     $password = $_GET['login-password'];
@@ -50,6 +53,7 @@
                                                 if($row["Password"] == $password) {
                                                     echo('<script>loginOut()</script>');
                                                     $test=2;
+                                                    $loggedIn = $name;
                                                     break;
                                                 }
                                             }
@@ -74,7 +78,17 @@
                 <?php
                     if ($test == 2 ) {
                         echo('<script>test()</script>');
-                        echo ('<li> <a id="job"> Jobs </a> </li>');
+                        $sqlTestIs = "SELECT `is` from `user` WHERE `Username` = '$loggedIn';";
+                        $TestIs = $conn->query($sqlTestIs);
+                        while($row = mysqli_fetch_assoc($TestIs)) {
+                            if($row["is"] == "Programmer" or "Master") {
+                                echo ('<li> <a href="requestProgrammer.php" target="_blank" id="request"> Requests </a> </li>');
+                            }
+
+                            if($row["is"] == "Customer") {
+                                echo ('<li> <a href="requestCustomer.php" target="_blank" id="request"> Requests </a> </li>');
+                            }
+                        }
                         echo('<li><a onclick="logout()"> Logout </a></li>');
                     }
                 ?>
@@ -94,7 +108,7 @@
                     </a>
                 </li>
                 <li>
-                    <button class="side-menu-button1" id="smButton2" onclick="closeSideMenu()"/>
+                    <button class="side-menu-button1" id="smButton2" onclick="closeSideMenu()">
                         X
                     </button>
                 </li>
@@ -111,29 +125,29 @@
                 <div class="main-page">
                     <div class="statistic" id="statistic">
 
-                        <div>
-                            <h1> About Me </h1>
-                            <p> 
+                        <div id="6" onmouseenter="newsBlockOpen(6)" onmouseleave="newsBlockClose(6)">
+                            <h1 id="60"> About Me </h1>
+                            <p id ="61"> 
                                 Text
                             </p>
                         </div>
                         
-                        <div>
-                            <h1> Jobs</h1>
+                        <div id="7" onmouseenter="newsBlockOpen(7)" onmouseleave="newsBlockClose(7)">
+                            <h1 id="70"> Requests</h1>
                             <?php
                                 $number = 5;
-                                echo('<p>' . $number . ' jobs</p>');
+                                echo('<p id=71>' . $number . ' Requests</p>');
                             ?>
                         </div>
 
-                        <div>
-                            <h1> Rating </h1>
+                        <div id="8" onmouseenter="newsBlockOpen(8)" onmouseleave="newsBlockClose(8)">
+                            <h1 id="80"> Rating </h1>
                             <?php
                                 $customers = 6;
                                 $customersHappy = 5;
 
                                 $rating=(round(($customersHappy / $customers)*100));
-                                echo('<p>' . $rating . '%  satisfaction rate </p>');
+                                echo('<p id="81">' . $rating . '%  satisfaction rate </p>');
                             ?>
                         </div>
                     </div>
@@ -141,44 +155,44 @@
                         <p> What happend and What will happen </p>
                     </div>
                     <div class="news-overlay">
-                        <div class="news-container" id="news">
-                            <div class="news" id="news1" onmouseover="blockAnimation('news1')" onmouseout="blockAnimationEnd()">
+                        <div class="news-container">
+                            <div class="news" id="1" onmouseenter="newsBlockOpen(1)" onmouseleave="newsBlockClose(1)">
                                 <div class="news-panel">
-                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <img id="10" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> First Post </h1>
-                                    <p> Text </p>
+                                    <p id="11"> Text </p>
                                 </div>
                             </div>
 
-                            <div class="news">
+                            <div class="news" id="2" onmouseenter="newsBlockOpen(2)" onmouseleave="newsBlockClose(2)">
                                 <div class="news-panel">
-                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <img id="20" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Second Post </h1>
-                                    <p> Text </p>
+                                    <p id="21"> Text </p>
                                 </div>
                             </div>
 
-                            <div class="news">
+                            <div class="news" id="3" onmouseenter="newsBlockOpen(3)" onmouseleave="newsBlockClose(3)">
                                 <div class="news-panel">
-                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <img id="30" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Third Post </h1>
-                                    <p> Text </p>
+                                    <p id="31"> Text </p>
                                 </div>
                             </div>
 
-                            <div class="news">
+                            <div class="news" id="4" onmouseenter="newsBlockOpen(4)"onmouseleave="newsBlockClose(4)">
                                 <div class="news-panel">
-                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <img id="40" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Fourth Post </h1>
-                                    <p> Text </p>
+                                    <p id="41"> Text </p>
                                 </div>
                             </div>
 
-                            <div class="news">
+                            <div class="news" id="5" onmouseenter="newsBlockOpen(5)" onmouseleave="newsBlockClose(5)">
                                 <div class="news-panel">
-                                    <img src="logo_icon_inverted.png" height="100px" width="100px"/>
+                                    <img id="50" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Fifth Post </h1>
-                                    <p> Text </p>
+                                    <p id="51"> Text </p>
                                 </div>
                             </div>
                         </div>

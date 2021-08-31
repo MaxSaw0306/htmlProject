@@ -1,3 +1,5 @@
+// Homepage
+
 @mixin side-menu-part () {
     display: flex;
     flex-direction: column;
@@ -15,17 +17,9 @@
     }
 }
 
-@mixin input-text () {
-    margin-top: 5px;
-    margin-left: 5px;
-    height: 30px;
-    width: 70%;
-    font-size: small;
-}
-
-
 $color: #0a699f;
 $border: #111213 outset 4px;
+
 
 body {
     margin: 0;
@@ -49,13 +43,15 @@ a {
     left: -200;
     flex-direction: column;
     min-width: fit-content;
-    width: 7%;
-    height: 100%;
+    width: fit-content;
+    height: fit-content;
     margin: 0;
     padding: 0;
-    background-color: transparent;
     z-index: 4;
     flex: 1;
+    transition: 0.5s;
+    background: #0c2436;
+    background: linear-gradient(to bottom, #0c2436 0%,#84cafe 100%);
 
     & a {
         @include side-menu-part();
@@ -67,14 +63,22 @@ a {
     display: none;
 }
 
-.login {
-    @include side-menu-part();
-    & > :nth-chlid(1) {
-        @include input-text();
-    }
+.login input {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    color: rgb(93, 196, 255);
+    margin-bottom: 10px;
+    font-size: large;
+    text-align: center;
+    width: 199px;
+    justify-content: center;
+    height: 50px;
 
-    & > :nth-chlid(2) {
-        @include input-text();
+
+    &:hover {
+        color: red;
+        background-color: #85cbff;
     }
 }
 
@@ -165,24 +169,6 @@ a {
     margin-top: 40px;
 }
 
-.register {
-    display: flex;
-    flex-direction: column;
-    margin: 5% 40% 0;
-    width: 20%;
-    height: fit-content;
-    background-image: url(https://www.satellitetoday.com/wp-content/uploads/2019/06/Screen-Shot-2019-06-13-at-5.50.12-PM.png);
-
-    & > input {
-        margin: 2.5% 35% 2.5% 35%;
-        width: 30%;
-        height: 70px;
-        background-color: $color;
-        font-size: large;
-        color: #85cbff;
-    }
-}
-
 .statistic {
     display: flex;
     flex-direction: row;
@@ -199,28 +185,16 @@ a {
         width: 250px;
         min-height: fit-content;
         height: 250px;
-
-        background-image: url(field_bg.png);
+        background: #0c2436;
+        background: linear-gradient(to bottom, #0c2436 0%,#84cafe 100%);
         margin-left: 3%;
         border: $border;
         color: #85cbff;
+        transition: 0.5s;
 
         & p {
             display: none;
         }
-
-        &:hover {
-            animation: stat-block 0.25s forwards;
-        }
-
-        &:hover p {
-            display: block;
-        }
-
-        &:hover h1 {
-            display: none;
-        }
-
     }
 
     & > span {
@@ -245,10 +219,11 @@ a {
 .news {
     border: $border;
     margin-left: 100px;
-    background-image: url(field_bg.png);
+    background: #0c2436;
+    background: linear-gradient(to bottom, #0c2436 0%,#84cafe 100%);
     width: 366px;
     height: 203px;
-    transition: 1s;
+    transition: 0.5s;
 
 
     & p {
@@ -258,49 +233,67 @@ a {
     & img {
         display: none;
     }
-
-    &:hover {
-        height: 100%;
-        animation: stat-block 0.5s forwards;
-    }
-
-    /*&:hover p {
-        animation: appear-delay 1s forwards;
-    }
-
-    &:hover img {
-        animation: appear-delay 1s forwards;
-    }
-
-    &:hover h1 {
-        animation: appear-delay 1s forwards;
-    } */
 }
 
 .news-panel {
     margin: 50 100 100 50;
 }
 
-@media (max-width: 600px) {
-    
-    .header-menue {
-        height: 150px;
-    }
-}
-
-
-
 @keyframes buttonanimation {
     0% {transform: rotate(0deg);}
     100% {transform: rotate(360deg);}
 }
 
-@keyframes stat-block {
-    from {border-width: 5px;}
-    to {border-width: 10px;}
+//Register Page----------------------------------------------------------------------------------------------------------------------------------------------
+.register-header {
+    background: #0c2436;
+    width: 100%;
+    height: 15%;
+    position: fixed;
+    
+    & > div {
+        background-color: #85cbff;
+        height: 100%;
+        width: 10%;
+        color: white;
+        font-size: 100;
+
+        &:hover {
+            color: red;
+        }
+    }
 }
 
-@keyframes appear-delay {
-    from {display: none;}
-    to {display: block;}
+.register-body {
+    background: #0c2436;
+    background: linear-gradient(to bottom, #0c2436 0%,#84cafe 100%);
+    height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.register {
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: fit-content;
+
+    & > input {
+        display: flex;
+        flex-direction: column;
+        background-color: transparent;
+        color: rgb(93, 196, 255);
+        margin-bottom: 50px;
+        text-align: center;
+        font-size: xx-large;
+        min-width: fit-content;
+        justify-content: center;
+        height: 120px;
+
+        &:hover {
+            background-color: #85cbff;
+            color: white;
+        }
+    }
 }
