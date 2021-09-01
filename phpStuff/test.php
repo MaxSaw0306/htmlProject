@@ -15,11 +15,12 @@
             }
             $test = 0;
             $loggedIn = 0;
+            $version = rand(0,10);
+            echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>")
         ?>
         <title>
             Maxwels
         </title>
-        <link rel="stylesheet" href="phpstyle.css?no-cache"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
         <script src="php-website-code.js">
         </script>
@@ -78,10 +79,11 @@
                 <?php
                     if ($test == 2 ) {
                         echo('<script>test()</script>');
+
                         $sqlTestIs = "SELECT `is` from `user` WHERE `Username` = '$loggedIn';";
                         $TestIs = $conn->query($sqlTestIs);
                         while($row = mysqli_fetch_assoc($TestIs)) {
-                            if($row["is"] == "Programmer" or "Master") {
+                            if($row["is"] == "Programmer" || $row["is"] == "Master") {
                                 echo ('<li> <a href="requestProgrammer.php" target="_blank" id="request"> Requests </a> </li>');
                             }
 

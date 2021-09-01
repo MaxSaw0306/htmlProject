@@ -41,11 +41,13 @@ a {
   font-size: xx-large;
   min-width: fit-content;
   justify-content: center;
+  transition: 0.25s;
   height: 50px;
 }
 .side-menu a:hover {
-  color: red;
-  background-color: #85cbff;
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  color: white;
 }
 
 .login-field {
@@ -63,10 +65,12 @@ a {
   width: 199px;
   justify-content: center;
   height: 50px;
+  transition: 0.25s;
 }
 .login input:hover {
-  color: red;
-  background-color: #85cbff;
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  color: white;
 }
 
 .log-buttons {
@@ -261,15 +265,181 @@ a {
   flex-direction: column;
   background-color: transparent;
   color: #5dc4ff;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
   text-align: center;
-  font-size: xx-large;
+  font-size: x-large;
   min-width: fit-content;
   justify-content: center;
-  height: 120px;
+  height: 80px;
 }
 .register > input:hover {
   background-color: #85cbff;
+  color: white;
+}
+
+.bg {
+  background: #0c2436;
+  background: linear-gradient(to bottom, #0c2436 0%, #84cafe 100%);
+}
+.bg > * {
+  color: #84cafe;
+}
+
+.face {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.face ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.programmer-bar {
+  position: fixed;
+  top: 0;
+  left: 100px;
+  width: 100%;
+  height: 100px;
+  background-color: transparent;
+  z-index: 1;
+}
+.programmer-bar > ul {
+  display: flex;
+  flex-direction: row;
+}
+.programmer-bar > ul > li {
+  display: flex;
+  width: 30%;
+  height: 100px;
+}
+.programmer-bar > ul > li > ul {
+  width: 100%;
+}
+
+.request-bar {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  width: 100px;
+  height: 100%;
+  background-color: transparent;
+  z-index: 1;
+}
+.request-bar > ul {
+  display: flex;
+  flex-direction: column;
+}
+.request-bar > ul > li {
+  display: flex;
+  width: 100%;
+  height: 268px;
+}
+
+.main-screen {
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  z-index: auto;
+}
+
+.programmers {
+  flex-direction: column;
+}
+.programmers > ul {
+  display: flex;
+  flex-direction: column;
+}
+.programmers > ul > li {
+  display: none;
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+.programmers:hover > ul {
+  background: #0c2436;
+  background: linear-gradient(to bottom, #0c2436 0%, #84cafe 100%);
+}
+.programmers:hover > ul > li {
+  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+.programmers:hover > ul > li:hover {
+  color: white;
+}
+
+.programmer-icon {
+  width: 60%;
+  height: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.programm-theme {
+  flex-direction: column;
+}
+.programm-theme > ul {
+  display: flex;
+  flex-direction: column;
+}
+.programm-theme > ul > li {
+  display: none;
+  width: 100%;
+  height: 100px;
+  position: relative;
+}
+.programm-theme:hover > ul {
+  background: #0c2436;
+  background: linear-gradient(to bottom, #0c2436 0%, #84cafe 100%);
+}
+.programm-theme:hover > ul > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+.programm-theme:hover > ul > li:hover {
+  border-top: 5px solid white;
+  border-bottom: 5px solid white;
+  color: white;
+}
+
+.search-field {
+  width: 100%;
+  height: 100px;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.type-field {
+  height: 40px;
+  width: 80%;
+}
+
+.search-button {
+  height: 40px;
+  width: 40px;
+}
+
+.list-face {
+  width: 100%;
+  min-height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.25s;
+}
+.list-face:hover {
   color: white;
 }
 
