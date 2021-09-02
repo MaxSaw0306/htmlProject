@@ -47,14 +47,19 @@
                                     $TestUSername=$conn->query($sqlTestUsername);
                                     $sqlTestPass = "SELECT `Password` from `user` WHERE `Username` = '$name';";
                                     $TestPass=$conn->query($sqlTestPass);
+                                    $sqlTestID = "SELECT `ID` from `user` WHERE `Username` = '$name';";
+                                    $TestID=$conn->query($sqlTestID);
                                     $test = 0;
+                                    $getID = mysqli_query($conn, "SELECT ID as id FROM user WHERE `Username` = '$name';");
+                                    $id = mysqli_fetch_assoc($getID);
+                                    $ID = ($id['id']);
                                     while($row = mysqli_fetch_assoc($TestUSername)) {
                                         if($row["Username"] == $name) {
                                             while($row = mysqli_fetch_assoc($TestPass)) {
                                                 if($row["Password"] == $password) {
                                                     echo('<script>loginOut()</script>');
-                                                    $test=2;
                                                     $loggedIn = $name;
+                                                    $test=2;
                                                     break;
                                                 }
                                             }
@@ -84,11 +89,11 @@
                         $TestIs = $conn->query($sqlTestIs);
                         while($row = mysqli_fetch_assoc($TestIs)) {
                             if($row["is"] == "Programmer" || $row["is"] == "Master") {
-                                echo ('<li> <a href="requestProgrammer.php" target="_blank" id="request"> Requests </a> </li>');
+                                echo ("<li> <a href='http://localhost/htmlProject/phpStuff/requestProgrammer.php?user=$loggedIn' target='_blank' id='request'> Requests </a> </li>");
                             }
 
                             if($row["is"] == "Customer") {
-                                echo ('<li> <a href="requestCustomer.php" target="_blank" id="request"> Requests </a> </li>');
+                                echo("<il> <a href='http://localhost/htmlProject/phpStuff/requestCustomer.php?user=$loggedIn' target='_blank' id='request'> Requests </a> </li>");
                             }
                         }
                         echo('<li><a onclick="logout()"> Logout </a></li>');

@@ -3,7 +3,8 @@
         <meta charset="utf-8"/>
         <link rel="stylesheet" href="phpstyle.css"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
-        <script src="php-website-code.js"></script>
+        <script src="php-website-code.js">
+        </script>
         <title>
             Master Requests
         </title>
@@ -75,6 +76,7 @@
                             <input type="text" placeholder="Name/Mail/ID..."/>
                             <input type="submit" value="🔎"/>
                         </form>
+                        
                     </il>
                 </ul>
             </div>

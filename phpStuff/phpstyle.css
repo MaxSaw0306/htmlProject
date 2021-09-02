@@ -337,16 +337,6 @@ a {
   height: 268px;
 }
 
-.main-screen {
-  position: fixed;
-  top: 100px;
-  left: 100px;
-  background-color: white;
-  height: 100%;
-  width: 100%;
-  z-index: auto;
-}
-
 .programmers {
   flex-direction: column;
 }
@@ -441,6 +431,54 @@ a {
 }
 .list-face:hover {
   color: white;
+}
+
+.main-screen {
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  z-index: auto;
+}
+
+.all-requests {
+  display: none;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+}
+
+.request-table {
+  margin-top: 100px;
+  width: 80%;
+  border: #85cbff solid 5px;
+  background: #0c2436;
+  background: linear-gradient(to bottom, #0c2436 0%, #84cafe 100%);
+  height: fit-content;
+}
+.request-table thead > tr {
+  font-size: xxx-large;
+  color: #85cbff;
+  height: 150px;
+}
+.request-table thead > tr > th {
+  border-left: black solid 3px;
+  border-bottom: black solid 3px;
+  margin: 0;
+  padding: 0;
+}
+.request-table tbody > tr {
+  font-size: x-large;
+  color: white;
+  height: 100px;
+}
+.request-table tbody > tr > td {
+  text-align: center;
+  border-left: black solid 1px;
+  border-bottom: black solid 1px;
 }
 
 /*# sourceMappingURL=phpstyle.css.map */
