@@ -40,7 +40,7 @@
                                 $GetProgrammerStatus = $conn->query($sqlGetProgrammer);
                                 $ProgrammerList = array();
                                 while ($row =$GetProgrammerStatus-> fetch_assoc()) {
-                                    array_push($ProgrammerList, $row["First_Name"], $row["Status"]);
+                                    array_push($ProgrammerList, $row["First_Name"], $row["Status"], $row["P_ID"]);
                                 }
                                 for ($counter = count($ProgrammerList)-1; $counter >= 0 ; $counter--) {
                                     if ($ProgrammerList[$counter] == "BUSY") {
@@ -52,7 +52,11 @@
                                     if ($ProgrammerList[$counter] == "AVAILABLE") {
                                         $nameProgrammer = $ProgrammerList[$counter-1];
                                         $statusProgrammer = $ProgrammerList[$counter];
-                                        echo ("<li> <a class='programmer-icon' style='background-color: green'> $nameProgrammer is $statusProgrammer </a></li>");
+                                        $P_ID = $ProgrammerList[$counter+1];
+                                        $getMail = $conn->query("SELECT `Email` FROM `user` WHERE `ID` = '$P_ID'");
+                                        $row3 = $getMail->fetch_assoc();
+                                        $mail = $row3["Email"];
+                                        echo ("<li> <a href='mailto:$mail' class='programmer-icon' style='background-color: green'> $nameProgrammer is $statusProgrammer </a></li>");
                                     }
                                 }
                                 
@@ -93,7 +97,7 @@
                         </form>
                     </li>
                     <li class="help">
-                        <a class="list-face">
+                        <a href="mailto:maxwels.contacts@gmail.com" class="list-face">
                             ?
                         </a>
                     <li>
@@ -120,11 +124,6 @@
                             Done
                         </a>
                     </li>
-                    <li>
-                        <a class="list-face" onclick="writeMail()">
-                            Mail
-                        </a>
-                    </li>
                 </ul>
             </div>
             <div class="main-screen">
@@ -132,7 +131,7 @@
                     <?php
                         if(isset($_GET['user'])) {
                             $id = $_GET['user'];
-                            $sqlGetRequests = "SELECT * FROM requests WHERE `Requested_by` = '$id' ";
+                            $sqlGetRequests = "SELECT * FROM requests WHERE `Requested_by` = '$id' AND `Status` != 'DONE'";
                             $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
                             $requestList = array("0");
                             echo( "
