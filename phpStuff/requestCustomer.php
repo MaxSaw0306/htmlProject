@@ -16,11 +16,12 @@
             $test = 0;
             $loggedIn = 0;
             $version = rand(0,999999999) + rand(0,999999999);
-            echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>")
+            echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>
+                <script src='php-website-code.js?v=$version'></script>
+            ");
         ?>
         <meta charset="utf-8"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
-        <script src="php-website-code.js?v=$version"></script>
         <title>
             Your Requests
         </title>
@@ -120,7 +121,7 @@
                         </a>
                     </li>
                     <li>
-                        <a class="list-face">
+                        <a class="list-face" onclick="writeMail()">
                             Mail
                         </a>
                     </li>
@@ -226,26 +227,35 @@
                     ?>
                 </div>
                 <div class="all-requests" id="addRequests">
-                    <div>
-                        <form>
-                        <?php
-                            $user = $_GET['user'];
-                            echo("
-                            <input type='hidden' value= $user name='user'/>
-                            <label for='topic'> What is it about </label><br>
-                            <input type='text' id='topic' name='topic'/><br>
-                            <input type='radio' id='website' name='Website' value='Website'/>
-                            <label for='website'> Website </label><br>
-                            <input type='radio' id='Webdesign' name='Webdesign' value='Webdesign'/>
-                            <label for='Webdesign'>Webdesign</label><br>
-                            <input type='radio' id='Game' name='Game' value='Game'/>
-                            <label for='Game'>Game</label><br>
-                            <input type='radio' id='Database' name='Database' value='Database'/>
-                            <label for='Database'>Database</label><br>
-                            <input type='radio' id='Other' name='Other' value='Other'/>
-                            <label for='Other'>Other</label><br>
-                            <input type='submit' value='Create Request'/>
-                        ");?>
+                    <div class="createRequestBG">
+                        <form class="createRequest">
+                            <?php
+                                $user = $_GET['user'];
+                                echo("
+                                <input type='hidden' value= $user name='user'/>
+                                <label for='topic'> What is it about </label><br>
+                                <input type='text' id='topic' name='topic'/><br>
+                                <input type='radio' id='website' name='type' value='Website'/>
+                                <label class='radio-label' for='website'> Website </label><br>
+                                <input type='radio' id='Webdesign' name='type' value='Webdesign'/>
+                                <label class='radio-label' for='Webdesign'>Webdesign</label><br>
+                                <input type='radio' id='Game' name='type' value='Game'/>
+                                <label class='radio-label' for='Game'>Game</label><br>
+                                <input type='radio' id='Database' name='type' value='Database'/>
+                                <label class='radio-label' for='Database'>Database</label><br>
+                                <input type='radio' id='Other' name='type' value='Other'/>
+                                <label class='radio-label' for='Other'>Other</label><br>
+                                <input type='submit' value='Create Request'/> 
+                            ");
+                                if (isset($_GET['type']) && isset($_GET['topic']) && isset($_GET['user'])) {
+                                    $user = $_GET['user'];
+                                    $type = $_GET['type'];
+                                    $topic = $_GET['topic'];
+                                    $sqlCreateRequest = "INSERT INTO `requests`(`Requested_by`, `Topic`, `Type`) VALUES ('$user', '$type', '$topic')";
+                                    $conn->query($sqlCreateRequest) or die($conn-> error);
+                                    echo ("<script> self.location = 'http://localhost/htmlProject/phpStuff/requestCustomer.php?user=Kamilla08' </script>");
+                                }
+                            ?>
                         </form>
                     </div>          
                 </div>
