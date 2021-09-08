@@ -46,21 +46,29 @@
                                     if ($ProgrammerList[$counter] == "BUSY") {
                                         $nameProgrammer = $ProgrammerList[$counter-1];
                                         $statusProgrammer = $ProgrammerList[$counter];
-                                        echo ("<li> <a class='programmer-icon' style='background-color: red'> $nameProgrammer is $statusProgrammer </a></li>");
+                                        $P_ID = $ProgrammerList[$counter+1];
+                                        $getUsername = $conn->query("SELECT `Username` FROM `user` WHERE `ID` = '$P_ID'");
+                                        $row3 = $getUsername->fetch_assoc();
+                                        $username = $row3["Username"];
+                                        echo ("<li> <a id='you' class='programmer-icon' style='background-color: red'> $nameProgrammer is $statusProgrammer </a></li>");
                                     }
+                                    
 
                                     if ($ProgrammerList[$counter] == "AVAILABLE") {
                                         $nameProgrammer = $ProgrammerList[$counter-1];
                                         $statusProgrammer = $ProgrammerList[$counter];
                                         $P_ID = $ProgrammerList[$counter+1];
-                                        $getMail = $conn->query("SELECT `Username` FROM `user` WHERE `ID` = '$P_ID'");
-                                        $row3 = $getMail->fetch_assoc();
+                                        $getUsername = $conn->query("SELECT `Username` FROM `user` WHERE `ID` = '$P_ID'");
+                                        $row3 = $getUsername->fetch_assoc();
                                         $username = $row3["Username"];
-                                        if($_GET['user'] == $username){
-                                            $color = "green";
-                                            echo ("<li> <a class='programmer-icon' style='background-color: $color'> $nameProgrammer is $statusProgrammer </a></li>");
+                                        $getMail = $conn->query("SELECT `Email` FROM `user` WHERE `ID` = '$P_ID'");
+                                        $row4 = $getMail->fetch_assoc();
+                                        $mail = $row4["Email"];
+                                        $name = $_GET['user'];
+                                        if($name == $username){
+                                            echo ("<li> <a id='you' class='programmer-icon' style='background-color: green'> $nameProgrammer is $statusProgrammer </a></li>");
                                         }else{
-                                            echo ("<li> <a class='programmer-icon' style='background-color: $color'> $nameProgrammer is $statusProgrammer </a></li>");
+                                            echo ("<li> <a href='mailto:$mail' class='programmer-icon' style='background-color: green'> $nameProgrammer is $statusProgrammer </a></li>");
                                         }
                                     }
                                 }
@@ -105,7 +113,22 @@
                         <a href="mailto:maxwels.contacts@gmail.com" class="list-face">
                             ?
                         </a>
+                    </li>
+                    <?php
+                        $user = $_GET['user'];
+                        echo("
                     <li>
+                        <a class='list-face' onclick='setBusy(`$user`)' style='color: red;'>
+                            BUSY
+                        </a>
+                    </li>
+                    <li>
+                        <a class='list-face' onclick='setAvailable(`$user`)' style='color: green;'>
+                            AVAILABLE
+                        </a>
+                    </li>
+                    ");
+                    ?>
                 </ul>
             </div>
             <div class="request-bar">

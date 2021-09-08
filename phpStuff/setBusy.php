@@ -12,10 +12,6 @@
     die("Connection failed: " . $conn->connect_error);
     }
 
-    $user = $_POST['user'];
-    $status = $_POST['status'];
-
-    echo($user . $status);
-
-    $setBusy = $conn->query("UPDATE programmer p INNER JOIN user u ON u.ID = p.P_ID SET p.Status = 'TEST' WHERE u.Username = $user");
-
+    $user = $_GET['user'];
+    $setBusy = $conn->query("UPDATE programmer p INNER JOIN user u ON u.ID = p.P_ID SET p.Status = 'BUSY' WHERE u.Username = '$user'") or die($conn->error);
+?>

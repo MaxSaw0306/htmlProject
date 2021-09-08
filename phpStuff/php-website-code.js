@@ -86,7 +86,29 @@ function showDone() {
     document.getElementById("allRequests").style.display = "none";
 }
 
+function setBusy(username) {
+    fetch("http://localhost/htmlProject/phpStuff/setBusy.php?user="+username, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+        body: `user=${username}`
+    });
+    document.getElementById("you").innerHTML = username+" is BUSY";
+    document.getElementById("you").style.backgroundColor = "red";
+}
 
+function setAvailable(username) {
+    fetch("http://localhost/htmlProject/phpStuff/setAvailable.php?user="+username, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+        body: `user=${username}`
+    });
+    document.getElementById("you").innerHTML = username+" is AVAILABLE";
+    document.getElementById("you").style.backgroundColor = "green";
+}
 
 //Animations
 function newsBlockOpen(id) {
