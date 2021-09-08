@@ -86,6 +86,24 @@ function showDone() {
     document.getElementById("allRequests").style.display = "none";
 }
 
+function myRequests() {
+    document.getElementById("myRequests").style.display = "flex";
+    document.getElementById("allRequests").style.display = "none";
+    document.getElementById("doneRequests").style.display = "none";
+}
+
+function showAll2() {
+    document.getElementById("myRequests").style.display = "none";
+    document.getElementById("allRequests").style.display = "flex";
+    document.getElementById("doneRequests").style.display = "none";
+}
+
+function showDone2() {
+    document.getElementById("myRequests").style.display = "none";
+    document.getElementById("doneRequests").style.display = "flex";
+    document.getElementById("allRequests").style.display = "none";
+}
+
 function setBusy(username) {
     fetch("http://localhost/htmlProject/phpStuff/setBusy.php?user="+username, {
         method: "POST",

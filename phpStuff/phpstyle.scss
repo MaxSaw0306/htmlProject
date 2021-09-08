@@ -484,6 +484,7 @@ a {
     display: flex;
     justify-content: center;
     align-items: center;
+    text-align: center;
     transition: 0.25s;
 
     &:hover {
@@ -534,12 +535,18 @@ a {
         font-size: x-large;
         color: white;
         height: 100px;
-
         & > td {
             text-align: center;
             border-left: black solid 1px;
             border-bottom: black solid 1px;
         }
+    }
+}
+
+.requester {
+    color: greenyellow;
+    &:hover {
+        border: greenyellow solid 2px;
     }
 }
 

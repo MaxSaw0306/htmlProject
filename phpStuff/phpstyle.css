@@ -432,6 +432,7 @@ a:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
   transition: 0.25s;
 }
 .list-face:hover {
@@ -484,6 +485,13 @@ a:hover {
   text-align: center;
   border-left: black solid 1px;
   border-bottom: black solid 1px;
+}
+
+.requester {
+  color: greenyellow;
+}
+.requester:hover {
+  border: greenyellow solid 2px;
 }
 
 .createRequestBG {
