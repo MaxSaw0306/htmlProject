@@ -250,8 +250,7 @@ a:hover {
 }
 
 .register-body {
-  background: #0c2436;
-  background: linear-gradient(to bottom, #0c2436 0%, #84cafe 100%);
+  background: linear-gradient(to right, #003366 0%, #00cc99 100%);
   height: 100%;
   width: 100%;
   display: flex;
@@ -316,7 +315,7 @@ a:hover {
 }
 .programmer-bar > ul > li {
   display: flex;
-  width: 30%;
+  width: 20%;
   height: 100px;
 }
 .programmer-bar > ul > li > ul {
@@ -424,6 +423,21 @@ a:hover {
 .search-button {
   height: 40px;
   width: 40px;
+}
+
+.stat-button {
+  width: 50%;
+  min-height: 100%;
+}
+
+.status-indicator {
+  position: fixed;
+  top: 100;
+  height: 30px;
+  width: 100px;
+  border-radius: 20%;
+  display: inline-block;
+  transition: 0.5s;
 }
 
 .list-face {
@@ -557,6 +571,45 @@ a:hover {
 .radio-label:hover {
   background: #0c2436;
   background: linear-gradient(to right, #0c2436 0%, #84cafe 100%);
+}
+
+.colorPickerWindow {
+  display: none;
+  flex-direction: column;
+  width: 80%;
+  height: 80%;
+}
+
+.color-preview {
+  display: flex;
+  flex-direction: row;
+}
+.color-preview > div {
+  border-radius: 50%;
+  border: 1px black solid;
+  height: 150px;
+  width: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px;
+}
+.color-preview > div > label {
+  color: white !important;
+}
+
+.color-picker {
+  display: flex;
+  flex-direction: column;
+}
+.color-picker > input {
+  width: 255px;
+  height: 50px;
+}
+
+.color-field {
+  height: 200px;
+  width: 300px;
 }
 
 /*# sourceMappingURL=phpstyle.css.map */

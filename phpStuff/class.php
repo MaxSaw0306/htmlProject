@@ -31,7 +31,7 @@
         }
 
         public function getId() {
-            return $this->cid;
+            return $this->id;
         }
 
         public function getUsername() {
@@ -39,7 +39,7 @@
         }
 
         public function getEmail() {
-            return $this->cid;
+            return $this->email;
         }
 
         public function getPassword() {
@@ -63,32 +63,87 @@
         public $doneRequests;
         public $status;
 
-        function __construct($pid, $firstName, $lastName, $doneRequests, $status) {
+        function __construct($pid, $firstName, $lastName, $doneRequests, $status, $id, $username, $email, $password, $is, $dateOfCreation) {
+            parent::__construct($id, $username, $email, $password, $is, $dateOfCreation);
             $this->pid = $pid;
             $this->firstName = $firstName;
             $this->lastName = $lastName;
             $this->doneRequests = $doneRequests;
             $this->status = $status;
+            $this->id = $id;
+            $this->username = $username;
+            $this->email = $email;
+            $this->password = $password;
+            $this->is = $is;
+            $this->dateOfCreation = $dateOfCreation;
+
         }
 
+        public function getPid() {
+            return $this->pid;
+        }
 
+        public function getFirstName() {
+            return $this->firstName;
+        }
+
+        public function getLastName() {
+            return $this->lastName;
+        }
+
+        public function getDoneRequests() {
+            return $this->doneRequests;
+        }
+
+        public function getStatus() {
+            return $this->status;
+        }
+
+        
     }
 
 
-    class Custommer extends User {
+    class Customer extends User {
         public $cid;
         public $firstName;
         public $lastName;
         public $phone;
         public $corp;
-        public $dateOfCreation;
 
-        function __construct($cid, $firstName, $lastName, $phone, $corp) {
+        function __construct($cid, $firstName, $lastName, $phone, $corp, $id, $username, $email, $password, $is, $dateOfCreation) {
+            parent::__construct($id, $username, $email, $password, $is, $dateOfCreation);
             $this->cid = $cid;
             $this->firstName = $firstName;
             $this->lastName = $lastName;
             $this->phone = $phone;
             $this->corp = $corp;
+            $this->id = $id;
+            $this->username = $username;
+            $this->email = $email;
+            $this->password = $password;
+            $this->is = $is;
+            $this->dateOfCreation = $dateOfCreation;
+
+        }
+
+        public function getCid() {
+            return $this->cid;
+        }
+
+        public function getFirstName() {
+            return $this->firstName;
+        }
+
+        public function getLastName() {
+            return $this->lastName;
+        }
+
+        public function getPhone() {
+            return $this->phone;
+        }
+
+        public function getCorp() {
+            return $this->corp;
         }
 
         public function createRequest($topic1, $type1, $deadline1) {
@@ -124,6 +179,38 @@
             $this->requestedOn = $requestedOn;
             $this->deadline = $deadline;
             $this->status = $status;
+        }
+
+        public function getRid() {
+            return $this->rid;
+        }
+
+        public function getRequestedBy() {
+            return $this->requestedBy;
+        }
+
+        public function getWorkingOn() {
+            return $this->workingOn;
+        }
+
+        public function getTopic() {
+            return $this->topic;
+        }
+
+        public function getType() {
+            return $this->type;
+        }
+
+        public function getRequestedOn() {
+            return $this->requestedOn;
+        }
+
+        public function getDeadline() {
+            return $this->deadline;
+        }
+
+        public function getStatus() {
+            return $this->status;
         }
     }
 ?>

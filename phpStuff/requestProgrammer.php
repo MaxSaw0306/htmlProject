@@ -19,6 +19,36 @@
             echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>
                 <script src='php-website-code.js?v=$version'></script>
             ");
+            include 'class.php';
+
+            $sqlGetAllUsers = $conn->query("SELECT * FROM `user`");
+            $allUsers = array();
+            while ($row = $sqlGetAllUsers -> fetch_assoc()) {
+                $newUser = new User($row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
+                array_push($allUsers,$newUser);
+            }
+
+            $sqlGetAllProgrammers = $conn->query("SELECT * FROM `programmer` INNER JOIN `user` ON `programmer`.`P_ID`=`user`.`ID`");
+            $allProgrammers = array();
+            while ($row = $sqlGetAllProgrammers -> fetch_assoc()) {
+                $newProgrammer = new Programmer($row["P_ID"], $row["First_Name"], $row["Last_Name"], $row["Done_Request"], $row["Status"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
+                array_push($allProgrammers, $newProgrammer);
+            }
+
+            $sqlGetAllCustommers = $conn->query("SELECT * FROM `customer` INNER JOIN `user` ON `customer`.`C_ID`=`user`.`ID`");
+            $allCustomers = array();
+            while ($row = $sqlGetAllCustommers -> fetch_assoc()) {
+                $newCustommer = new Customer($row["C_ID"], $row["FirstName_or_NameOfCompany"], $row["Last_Name"], $row["Phone"], $row["Company_or_Privat"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
+                array_push($allCustomers, $newCustommer);
+            }
+
+            $sqlGetAllRequests = $conn->query("SELECT * FROM `requests`");
+            $allRequests = array();
+            while ($row = $sqlGetAllRequests -> fetch_assoc()) {
+                $newRequest = new Request($row["R_ID"], $row["Requested_by"], $row["Working_on"], $row["Topic"], $row["Type"], $row["Requested_on"], $row["Deadline"], $row["Status"] );
+                array_push($allRequests, $newRequest);
+            }
+
         ?>
         <meta charset="utf-8"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
@@ -35,44 +65,27 @@
                             Programmer
                         </a>
                         <ul>
-                            <?php
-                                $sqlGetProgrammer = "SELECT * FROM programmer ORDER BY `Status` DESC";
-                                $GetProgrammerStatus = $conn->query($sqlGetProgrammer);
-                                $ProgrammerList = array();
-                                while ($row =$GetProgrammerStatus-> fetch_assoc()) {
-                                    array_push($ProgrammerList, $row["First_Name"], $row["Status"], $row["P_ID"]);
-                                }
-                                for ($counter = count($ProgrammerList)-1; $counter >= 0 ; $counter--) {
-                                    if ($ProgrammerList[$counter] == "BUSY") {
-                                        $nameProgrammer = $ProgrammerList[$counter-1];
-                                        $statusProgrammer = $ProgrammerList[$counter];
-                                        $P_ID = $ProgrammerList[$counter+1];
-                                        $getUsername = $conn->query("SELECT `Username` FROM `user` WHERE `ID` = '$P_ID'");
-                                        $row3 = $getUsername->fetch_assoc();
-                                        $username = $row3["Username"];
-                                        echo ("<li> <a id='you' class='programmer-icon' style='background-color: red'> $nameProgrammer is $statusProgrammer </a></li>");
-                                    }
-                                    
-
-                                    if ($ProgrammerList[$counter] == "AVAILABLE") {
-                                        $nameProgrammer = $ProgrammerList[$counter-1];
-                                        $statusProgrammer = $ProgrammerList[$counter];
-                                        $P_ID = $ProgrammerList[$counter+1];
-                                        $getUsername = $conn->query("SELECT `Username` FROM `user` WHERE `ID` = '$P_ID'");
-                                        $row3 = $getUsername->fetch_assoc();
-                                        $username = $row3["Username"];
-                                        $getMail = $conn->query("SELECT `Email` FROM `user` WHERE `ID` = '$P_ID'");
-                                        $row4 = $getMail->fetch_assoc();
-                                        $mail = $row4["Email"];
-                                        $name = $_GET['user'];
-                                        if($name == $username){
-                                            echo ("<li> <a id='you' class='programmer-icon' style='background-color: green'> $nameProgrammer is $statusProgrammer </a></li>");
-                                        }else{
-                                            echo ("<li> <a href='mailto:$mail' class='programmer-icon' style='background-color: green'> $nameProgrammer is $statusProgrammer </a></li>");
+                             <?php
+                                $user = $_GET['user'];
+                                for ($i = 0; $i < (count($allProgrammers)); $i++) {
+                                    $pid = $allProgrammers[$i]->getPid();
+                                    $name = $allProgrammers[$i]->getFirstName();
+                                    $status = $allProgrammers[$i]->getStatus();
+                                    $mail = $allProgrammers[$i]->getEmail();
+                                    $username = $allProgrammers[$i]->getUsername();
+                                    if($username != $_GET['user']) {
+                                        if ($status == "AVAILABLE") {
+                                        echo ("<li> <a href='mailto:$mail' id='you' class='programmer-icon' style='background-color: #00ff00'> $name is $status </a></li>");
                                         }
+
+                                        if ($status == "BUSY") {
+                                            echo ("<li> <a id='you' class='programmer-icon' style='background-color: #ff0000'> $name is $status </a></li>");
+                                        }
+                                    } else {
+                                        global $userstatus;
+                                        $userstatus = $status;
                                     }
                                 }
-                                
                             ?>
                         </ul>
                     </li>
@@ -117,13 +130,11 @@
                     <?php
                         $user = $_GET['user'];
                         echo("
-                    <li>
-                        <a class='list-face' onclick='setBusy(`$user`)' style='color: red;'>
+                    <li style='width: 40%;'>
+                        <a id='busy' class='list-face' onclick='setBusy(`$user`)' style='color: #ff0000; display: flex;'>
                             BUSY
                         </a>
-                    </li>
-                    <li>
-                        <a class='list-face' onclick='setAvailable(`$user`)' style='color: green;'>
+                        <a id='available' class='list-face' onclick='setAvailable(`$user`)' style='color: #00ff00; display: flex;'>
                             AVAILABLE
                         </a>
                     </li>
@@ -146,6 +157,11 @@
                     <li class="done-requests">
                         <a class="list-face" onclick="showDone2()">
                             Done
+                        </a>
+                    </li>
+                    <li class="done-requests">
+                        <a class="list-face" onclick="showColorPicker()">
+                            Color
                         </a>
                     </li>
                 </ul>
@@ -297,7 +313,43 @@
                         
                     ?>
                 </div>
+                <div id="colorPickerMenu" class="colorPickerWindow" style="background: linear-gradient(to bottom, #0c2436 0%,#84cafe 100%);">
+                    <div class="color-preview">
+                        <div id="green2" style="background: rgb(0, 255, 0)">
+                            <label for="green"> Green </label>
+                        </div>
+                        
+                        <div id="red2" style="background: rgb(255, 0, 0)">
+                            <label for="red"> Red </label>
+                        </div>
+
+                        <div id="blue2"  style="background: rgb(0, 0, 255)">
+                            <label for="blue"> Blue </label>
+                        </div>
+                    </div>
+                    <div class="color-picker">
+                        <input id="green" onchange="changeColor(1)" name="green" type="range" min="0" max="255" value="255"/>
+                        <input id="red" onchange="changeColor(2)" name="red" type="range" min="0" max="255" value="255"/>
+                        <input id="blue" onchange="changeColor(3)" name="blue" type="range" min="0" max="255" value="255"/>
+                    </div>
+                    <div id="color1" onclick="changeColor('color1')" class="color-field" style="border: black solid 2px;"> Color1</div>
+                    <div id="color2" onclick="changeColor('color2')" class="color-field" style="border: black solid 2px;"> Color2 </div>
+                </div>
             </div>
+        <?php
+            if ($userstatus == "AVAILABLE") {
+                $color = "#00ff00";
+                $cord ="2400px";
+            } else {
+                $color = "#ff0000";
+                $cord ="1970px";
+            }
+            echo("
+            <span id='indicator' class='status-indicator' style='background: $color; left: $cord';>
+
+            </span>
+            ");
+        ?>
         </div>
     </body>
 </html>

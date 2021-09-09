@@ -90,18 +90,28 @@ function myRequests() {
     document.getElementById("myRequests").style.display = "flex";
     document.getElementById("allRequests").style.display = "none";
     document.getElementById("doneRequests").style.display = "none";
+    document.getElementById("colorPickerMenu").style.display = "none";
 }
 
 function showAll2() {
     document.getElementById("myRequests").style.display = "none";
     document.getElementById("allRequests").style.display = "flex";
     document.getElementById("doneRequests").style.display = "none";
+    document.getElementById("colorPickerMenu").style.display = "none";
 }
 
 function showDone2() {
     document.getElementById("myRequests").style.display = "none";
     document.getElementById("doneRequests").style.display = "flex";
     document.getElementById("allRequests").style.display = "none";
+    document.getElementById("colorPickerMenu").style.display = "none";
+}
+
+function showColorPicker() {
+    document.getElementById("myRequests").style.display = "none";
+    document.getElementById("allRequests").style.display = "none";
+    document.getElementById("doneRequests").style.display = "none";
+    document.getElementById("colorPickerMenu").style.display = "flex";
 }
 
 function setBusy(username) {
@@ -112,8 +122,8 @@ function setBusy(username) {
         },
         body: `user=${username}`
     });
-    document.getElementById("you").innerHTML = username+" is BUSY";
-    document.getElementById("you").style.backgroundColor = "red";
+    document.getElementById("indicator").style.backgroundColor = "red";
+    document.getElementById("indicator").style.left = "1971px";
 }
 
 function setAvailable(username) {
@@ -124,11 +134,38 @@ function setAvailable(username) {
         },
         body: `user=${username}`
     });
-    document.getElementById("you").innerHTML = username+" is AVAILABLE";
-    document.getElementById("you").style.backgroundColor = "green";
+    document.getElementById("indicator").style.backgroundColor = "#00ff00";
+    document.getElementById("indicator").style.left = "2400px";
+
 }
 
-//Animations
+function changeColor(id) {
+    let value1;
+    let value2;
+    let value3;
+    if (id = 1) {
+        value1 = document.getElementById("green").value;
+        document.getElementById("green2").style.backgroundColor = "rgb(0, "+value1+", 0)";
+        document.getElementById("green2").innerHTML = value1;
+    }
+
+    if (id = 2) {
+        value2 = document.getElementById("red").value;
+        document.getElementById("red2").style.backgroundColor = "rgb("+value2+" , 0 , 0)";
+        document.getElementById("red2").innerHTML = value2;
+    }
+
+    if (id = 3) {
+        value3 = document.getElementById("blue").value;
+        document.getElementById("blue2").style.backgroundColor = "rgb(0, 0, "+value3+")";
+        document.getElementById("blue2").innerHTML = value3;
+    }
+
+    console.log("rgb("+value2+", "+value1+", "+value3+")");
+    document.getElementById(id).style.backgroundColor = "rgb("+value2+", "+value1+", "+value3+")";
+    document.getElementById(id).style.borderColor = "white";
+}
+//Animations________________________________________________________________________________________________________________________________________________
 function newsBlockOpen(id) {
     const element = (document.getElementById(id));
     const styles = getComputedStyle(element);
