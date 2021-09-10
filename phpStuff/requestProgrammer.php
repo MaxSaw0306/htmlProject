@@ -56,7 +56,7 @@
             Your Requests
         </title>
     </head>
-    <body class="bg">
+    <body class="bg" id="body">
         <div class="face">
             <div class="programmer-bar">
                 <ul>
@@ -64,7 +64,7 @@
                         <a class="list-face">
                             Programmer
                         </a>
-                        <ul>
+                        <ul id="programmer-chart">
                              <?php
                                 $user = $_GET['user'];
                                 for ($i = 0; $i < (count($allProgrammers)); $i++) {
@@ -93,7 +93,7 @@
                         <a class="list-face">
                             Programms
                         </a>
-                        <ul>
+                        <ul id="programms">
                             <li>
                                 <a>
                                     Website
@@ -173,7 +173,7 @@
                         $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
                         $requestList = array("0");
                         echo( "
-                            <table class='request-table'>
+                            <table class='request-table' id='request-table'>
                                 <thead>
                                     <tr>
                                         <th> Requested by </th>
@@ -225,7 +225,7 @@
                         $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
                         $requestList = array("0");
                         echo( "
-                            <table class='request-table'>
+                            <table id='my-table' class='request-table'>
                                 <thead>
                                     <tr>
                                         <th> Working on </th>
@@ -272,7 +272,7 @@
                         $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
                         $requestList = array("0");
                         echo( "
-                            <table class='request-table'>
+                            <table id='done-table' class='request-table'>
                                 <thead>
                                     <tr>
                                         <th> Working on </th>
@@ -327,13 +327,20 @@
                             <label for="blue"> Blue </label>
                         </div>
                     </div>
-                    <div class="color-picker">
-                        <input id="green" onchange="changeColor(1)" name="green" type="range" min="0" max="255" value="255"/>
-                        <input id="red" onchange="changeColor(2)" name="red" type="range" min="0" max="255" value="255"/>
-                        <input id="blue" onchange="changeColor(3)" name="blue" type="range" min="0" max="255" value="255"/>
+                    <div style="display: flex; flex-direction: row;">
+                        <div style="display: flex; flex-direction: column;" >
+                            <div class="color-picker">
+                                <input id="green" onchange="changeColor(1)" name="green" type="range" min="0" max="255" value="255"/>
+                                <input id="red" onchange="changeColor(2)" name="red" type="range" min="0" max="255" value="255"/>
+                                <input id="blue" onchange="changeColor(3)" name="blue" type="range" min="0" max="255" value="255"/>
+                            </div>
+                            <div id="color1" onclick="selectColor('color1')" class="color-field" style="border: black solid 2px;"> Color1</div>
+                            <div id="color2" onclick="selectColor('color2')" class="color-field" style="border: black solid 2px;"> Color2 </div>
+                        </div>
+                        <div class="submit-color-change" onclick="submitColorChange()">
+                            Submit
+                        </div>
                     </div>
-                    <div id="color1" onclick="changeColor('color1')" class="color-field" style="border: black solid 2px;"> Color1</div>
-                    <div id="color2" onclick="changeColor('color2')" class="color-field" style="border: black solid 2px;"> Color2 </div>
                 </div>
             </div>
         <?php
