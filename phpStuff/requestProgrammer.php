@@ -169,9 +169,6 @@
             <div class="main-screen">
                 <div class="all-requests" id="allRequests">
                     <?php
-                        $sqlGetRequests = "SELECT * FROM requests WHERE `Status` != 'DONE' AND `Working_on` IS NULL";
-                        $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
-                        $requestList = array("0");
                         echo( "
                             <table class='request-table' id='request-table'>
                                 <thead>
@@ -186,31 +183,28 @@
                                 </thead>
                                 <tbody>
                         ");
-                        while ($row2 = $GetRequests-> fetch_assoc()) {
-                            array_push($requestList, $row2["Requested_by"], $row2["Topic"], $row2["Type"], $row2["Requested_on"], $row2["Deadline"], $row2["Status"]);
-                        }
-                        $requestCounter = count($requestList);
-                        for ($i = ($requestCounter -1); $i > 0; $i--) {
-                            if ($i % 6 == 0 && $i != 0) {
-                                $requestStatus = $requestList[$i];
-                                $requestDeadline = $requestList[$i-1];
-                                $requestRequestedOn = $requestList[$i-2];
-                                $requestType = $requestList[$i-3];
-                                $requestTopic = $requestList[$i-4];
-                                $requestBy = $requestList[$i-5];
-                                $id = $_GET['user'];
-                                
 
+                        for ($i = 0; $i < count($allRequests); $i++) {
+                            $rid = $allRequests[$i]->getRid();
+                            $requestedBy = $allRequests[$i]->getRequestedBy();
+                            $workingOn = $allRequests[$i]->getWorkingOn();
+                            $topic = $allRequests[$i]->getTopic();
+                            $type = $allRequests[$i]->getType();
+                            $requestedOn = $allRequests[$i]->getRequestedOn();
+                            $deadline = $allRequests[$i]->getDeadline();
+                            $status = $allRequests[$i]->getStatus();
+
+                            if ($status != "DONE" && $status == "REQUESTED") {
                                 echo("
                                     <tr>
-                                        <td class='requester'> <a style='width=100%; height=100%;' href=mailto:''> $requestBy </a> </td>
-                                        <td> $requestTopic </td>
-                                        <td> $requestType </td>
-                                        <td> $requestRequestedOn </td>
-                                        <td> $requestDeadline </td>
-                                        <td> $requestStatus </td>
+                                        <td class='requester'> <a style='width=100%; height=100%;' href=mailto:''> $requestedBy </a> </td>
+                                        <td> $topic </td>
+                                        <td> $type </td>
+                                        <td> $requestedOn </td>
+                                        <td> $deadline </td>
+                                        <td> $status </td>
                                     </tr>"
-                                );        
+                                );
                             }
                         }
                         echo("
@@ -219,17 +213,17 @@
                         ");
                     ?>
                 </div>
+                <!--------------------------------------------------------------------------------------->
                 <div class="all-requests" id="myRequests">
                     <?php
-                        $sqlGetRequests = "SELECT * FROM requests WHERE `Working_on` = '$id'";
-                        $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
-                        $requestList = array("0");
+
                         echo( "
-                            <table id='my-table' class='request-table'>
+                            <table class='request-table' id='request-table'>
                                 <thead>
                                     <tr>
-                                        <th> Working on </th>
+                                        <th> Requested by </th>
                                         <th> Topic </th>
+                                        <th> Type </th>
                                         <th> Requested on </th>
                                         <th> Deadline </th>
                                         <th> Status </th>
@@ -237,27 +231,35 @@
                                 </thead>
                                 <tbody>
                         ");
-                        while ($row2 = $GetRequests-> fetch_assoc()) {
-                            array_push($requestList, $row2["Working_on"], $row2["Topic"], $row2["Requested_on"], $row2["Deadline"], $row2["Status"] );
-                        }
-                        $requestCounter = count($requestList);
-                        for ($i = ($requestCounter -1); $i > 0; $i--) {
-                            if ($i % 5 == 0 && $i != 0) {
-                                $requestStatus = $requestList[$i-4];
-                                $requestDeadline = $requestList[$i-3];
-                                $requestRequestedOn = $requestList[$i-2];
-                                $requestTopic = $requestList[$i-1];
-                                $requestWorkingOn = $requestList[$i];
-                                echo("
-                                    <tr>
-                                        <td> $requestStatus </td>
-                                        <td> $requestDeadline </td>
-                                        <td> $requestRequestedOn </td>
-                                        <td> $requestTopic </td>
-                                        <td> $requestWorkingOn </td>
-                                    </tr>"
-                                );        
+
+                        for ($i = 0; $i < count($allProgrammers); $i++) {
+                            if ($allProgrammers[$i]->getUsername() == $_GET['user']);{
+                                for ($i2 = 0; $i2 < count($allRequests); $i2++) {
+                                    $rid = $allRequests[$i2]->getRid();
+                                    $requestedBy = $allRequests[$i2]->getRequestedBy();
+                                    $workingOn = $allRequests[$i2]->getWorkingOn();
+                                    $topic = $allRequests[$i2]->getTopic();
+                                    $type = $allRequests[$i2]->getType();
+                                    $requestedOn = $allRequests[$i2]->getRequestedOn();
+                                    $deadline = $allRequests[$i2]->getDeadline();
+                                    $status = $allRequests[$i2]->getStatus();
+
+                                    if ($status ="IN PROGRESS" && $workingOn == $_GET['user']) {
+                                    
+                                        echo("
+                                            <tr>
+                                                <td class='requester'> <a style='width=100%; height=100%;' href=mailto:''> $requestedBy </a> </td>
+                                                <td> $topic </td>
+                                                <td> $type </td>
+                                                <td> $requestedOn </td>
+                                                <td> $deadline </td>
+                                                <td> $status </td>
+                                            </tr>"
+                                        );
+                                    }
+                                }
                             }
+                            break;
                         }
                         echo("
                                 </tbody>
