@@ -15,12 +15,14 @@
 
 .header {
     @include field("block", "none", "100%", "200px");
-    position: sticky;
+    position: fixed;
     top: 0;
 }
 
 .navigator {
     @include field("block", "none", "100%", "100px");
+    position: fixed;
+    top: 200px;
 }
 
 .mainpage{
@@ -29,6 +31,10 @@
 
 .side-menu {
     @include field("flex", "column", "300px", "80%");
+    position: fixed;
+    top: 300px;
+    left: -300px;
+
 }
 
 .footer {
