@@ -1,0 +1,36 @@
+//patterns
+@mixin field ($display, $flexdirection, $width, $height) {
+    display: $display;
+    flex-direction: $flexdirection;
+    width: $width;
+    height: $height;
+}
+
+
+//head
+.window {
+    @include field("flex", "column", "100%", "100%");
+    overflow: auto;
+}
+
+.header {
+    @include field("block", "none", "100%", "200px");
+    position: sticky;
+    top: 0;
+}
+
+.navigator {
+    @include field("block", "none", "100%", "100px");
+}
+
+.mainpage{
+    @include field("flex", "row", "100%", "80%");
+}
+
+.side-menu {
+    @include field("flex", "column", "300px", "80%");
+}
+
+.footer {
+    @include field("block", "none", "100%", "50px");
+}
