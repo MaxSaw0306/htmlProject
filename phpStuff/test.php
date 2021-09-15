@@ -101,7 +101,7 @@
                 ?>
                 <li>
                     <a href="#statistic">
-                        About Me
+                        About Us
                     </a>
                 </li>
                 <li>
@@ -126,14 +126,14 @@
                 <img style="top: 0" class="side-menu-button2" id="smButton" onmouseover="openSideMenu()" src="menu.png" height="50px" width="100px"/>
             </div>
             <div class="spacer">
-                <p> A Programmer you can trust! </p>
+                <p> Programmer you can trust! </p>
             </div>
             <div class="content">
                 <div class="main-page">
                     <div class="statistic" id="statistic">
 
                         <div id="6" onclick="newsBlockOpen(6)" onmouseleave="newsBlockClose(6)">
-                            <h1 id="60"> About Me </h1>
+                            <h1 id="60"> About Us </h1>
                             <p id ="61"> 
                                 Text
                             </p>
@@ -153,14 +153,14 @@
                             <h1 id="80"> Rating </h1>
                             <?php
 
-                                $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests`");
+                                $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests` WHERE `Status` = 'DONE'");
                                 $row = $sqlGetAllRequests -> fetch_assoc();
                                 $number = $row['total'];
-                                $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests` WHERE `Satsified` = 'YES'");
+                                $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests` WHERE `Satisfied` = 'YES'");
                                 $row = $sqlGetAllRequests -> fetch_assoc();
                                 $numberYes = $row['total'];
-                                $rating=(round(($number / $numberNo)*100));
-                                echo('<p id="81">' . $rating . '%  satisfaction rate </p>');
+                                $rating=(round(($numberYes / $number)*100));
+                                echo("<p id='81'>$rating%  satisfaction rate </p>");
                             ?>
                         </div>
                     </div>
