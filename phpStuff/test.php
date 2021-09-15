@@ -15,7 +15,7 @@
             }
             $test = 0;
             $loggedIn = 0;
-            $version = rand(0,10);
+            $version = rand(0,999999999) * rand(0,999999999);
             echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>")
         ?>
         <title>
@@ -132,28 +132,34 @@
                 <div class="main-page">
                     <div class="statistic" id="statistic">
 
-                        <div id="6" onmouseenter="newsBlockOpen(6)" onmouseleave="newsBlockClose(6)">
+                        <div id="6" onclick="newsBlockOpen(6)" onmouseleave="newsBlockClose(6)">
                             <h1 id="60"> About Me </h1>
                             <p id ="61"> 
                                 Text
                             </p>
                         </div>
                         
-                        <div id="7" onmouseenter="newsBlockOpen(7)" onmouseleave="newsBlockClose(7)">
+                        <div id="7" onclick="newsBlockOpen(7)" onmouseleave="newsBlockClose(7)">
                             <h1 id="70"> Requests</h1>
                             <?php
-                                $number = 5;
+                                $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests`");
+                                $row = $sqlGetAllRequests -> fetch_assoc();
+                                $number = $row['total'];
                                 echo('<p id=71>' . $number . ' Requests</p>');
                             ?>
                         </div>
 
-                        <div id="8" onmouseenter="newsBlockOpen(8)" onmouseleave="newsBlockClose(8)">
+                        <div id="8" onclick="newsBlockOpen(8)" onmouseleave="newsBlockClose(8)">
                             <h1 id="80"> Rating </h1>
                             <?php
-                                $customers = 6;
-                                $customersHappy = 5;
 
-                                $rating=(round(($customersHappy / $customers)*100));
+                                $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests`");
+                                $row = $sqlGetAllRequests -> fetch_assoc();
+                                $number = $row['total'];
+                                $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests` WHERE `Satsified` = 'YES'");
+                                $row = $sqlGetAllRequests -> fetch_assoc();
+                                $numberYes = $row['total'];
+                                $rating=(round(($number / $numberNo)*100));
                                 echo('<p id="81">' . $rating . '%  satisfaction rate </p>');
                             ?>
                         </div>
@@ -163,7 +169,7 @@
                     </div>
                     <div class="news-overlay">
                         <div class="news-container">
-                            <div class="news" id="1" onmouseenter="newsBlockOpen(1)" onmouseleave="newsBlockClose(1)">
+                            <div class="news" id="1" onclick="newsBlockOpen(1)" onmouseleave="newsBlockClose(1)">
                                 <div class="news-panel">
                                     <img id="10" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> First Post </h1>
@@ -171,7 +177,7 @@
                                 </div>
                             </div>
 
-                            <div class="news" id="2" onmouseenter="newsBlockOpen(2)" onmouseleave="newsBlockClose(2)">
+                            <div class="news" id="2" onclick="newsBlockOpen(2)" onmouseleave="newsBlockClose(2)">
                                 <div class="news-panel">
                                     <img id="20" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Second Post </h1>
@@ -179,7 +185,7 @@
                                 </div>
                             </div>
 
-                            <div class="news" id="3" onmouseenter="newsBlockOpen(3)" onmouseleave="newsBlockClose(3)">
+                            <div class="news" id="3" onclick="newsBlockOpen(3)" onmouseleave="newsBlockClose(3)">
                                 <div class="news-panel">
                                     <img id="30" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Third Post </h1>
@@ -187,7 +193,7 @@
                                 </div>
                             </div>
 
-                            <div class="news" id="4" onmouseenter="newsBlockOpen(4)"onmouseleave="newsBlockClose(4)">
+                            <div class="news" id="4" onclick="newsBlockOpen(4)"onmouseleave="newsBlockClose(4)">
                                 <div class="news-panel">
                                     <img id="40" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Fourth Post </h1>
@@ -195,7 +201,7 @@
                                 </div>
                             </div>
 
-                            <div class="news" id="5" onmouseenter="newsBlockOpen(5)" onmouseleave="newsBlockClose(5)">
+                            <div class="news" id="5" onclick="newsBlockOpen(5)" onmouseleave="newsBlockClose(5)">
                                 <div class="news-panel">
                                     <img id="50" src="logo_icon_inverted.png" height="100px" width="100px"/>
                                     <h1> Fifth Post </h1>

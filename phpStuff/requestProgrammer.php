@@ -45,7 +45,7 @@
             $sqlGetAllRequests = $conn->query("SELECT * FROM `requests`");
             $allRequests = array();
             while ($row = $sqlGetAllRequests -> fetch_assoc()) {
-                $newRequest = new Request($row["R_ID"], $row["Requested_by"], $row["Working_on"], $row["Topic"], $row["Type"], $row["Requested_on"], $row["Deadline"], $row["Status"] );
+                $newRequest = new Request($row["R_ID"], $row["Requested_by"], $row["Working_on"], $row["Topic"], $row["Type"], $row["Requested_on"], $row["Deadline"], $row["Status"], $row["Satisfied"] );
                 array_push($allRequests, $newRequest);
             }
 

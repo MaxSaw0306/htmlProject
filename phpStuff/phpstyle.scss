@@ -213,7 +213,7 @@ a {
         height: 250px;
         background: #0c2436;
         background: linear-gradient(to bottom, #0c2436 0%,#84cafe 100%);
-        margin-left: 3%;
+        margin: 3%;
         border: $border;
         color: #85cbff;
         transition: 0.5s;
@@ -235,6 +235,7 @@ a {
     flex-direction: row;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     background-image: url(https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77701515213.jpg);
     width: 100%;
     min-height: 600px;
@@ -244,13 +245,12 @@ a {
 
 .news {
     border: $border;
-    margin-left: 100px;
+    margin: 50px;
     background: #0c2436;
     background: linear-gradient(to bottom, #0c2436 0%,#84cafe 100%);
     width: 366px;
     height: 203px;
     transition: 0.5s;
-
 
     & p {
         display: none;
@@ -261,6 +261,19 @@ a {
     }
 }
 
+@media only screen and (max-width: 2400px) {
+  .news {
+    flex: 1 1 21%;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .news {
+    flex: 1 0 35%;
+  }
+}
+
+
 .news-panel {
     margin: 50 100 100 50;
 }
@@ -270,7 +283,7 @@ a {
     100% {transform: rotate(360deg);}
 }
 
-//Register Page----------------------------------------------------------------------------------------------------------------------------------------------
+//Register Pages----------------------------------------------------------------------------------------------------------------------------------------------
 .register-header {
     background: #0c2436;
     width: 100%;
@@ -323,7 +336,7 @@ a {
     }
 }
 
-//Request Customer-----------------------------------------------------------------------------------------------
+//Request Page-----------------------------------------------------------------------------------------------
 @mixin menu-bar ($direction, $top, $left, $width, $height) {
     position: fixed;
     top: $top;
