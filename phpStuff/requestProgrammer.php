@@ -19,36 +19,8 @@
             echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>
                 <script src='php-website-code.js?v=$version'></script>
             ");
+            
             include 'class.php';
-
-            $sqlGetAllUsers = $conn->query("SELECT * FROM `user`");
-            $allUsers = array();
-            while ($row = $sqlGetAllUsers -> fetch_assoc()) {
-                $newUser = new User($row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
-                array_push($allUsers,$newUser);
-            }
-
-            $sqlGetAllProgrammers = $conn->query("SELECT * FROM `programmer` INNER JOIN `user` ON `programmer`.`P_ID`=`user`.`ID`");
-            $allProgrammers = array();
-            while ($row = $sqlGetAllProgrammers -> fetch_assoc()) {
-                $newProgrammer = new Programmer($row["P_ID"], $row["First_Name"], $row["Last_Name"], $row["Done_Request"], $row["Status"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
-                array_push($allProgrammers, $newProgrammer);
-            }
-
-            $sqlGetAllCustommers = $conn->query("SELECT * FROM `customer` INNER JOIN `user` ON `customer`.`C_ID`=`user`.`ID`");
-            $allCustomers = array();
-            while ($row = $sqlGetAllCustommers -> fetch_assoc()) {
-                $newCustommer = new Customer($row["C_ID"], $row["FirstName_or_NameOfCompany"], $row["Last_Name"], $row["Phone"], $row["Company_or_Privat"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
-                array_push($allCustomers, $newCustommer);
-            }
-
-            $sqlGetAllRequests = $conn->query("SELECT * FROM `requests`");
-            $allRequests = array();
-            while ($row = $sqlGetAllRequests -> fetch_assoc()) {
-                $newRequest = new Request($row["R_ID"], $row["Requested_by"], $row["Working_on"], $row["Topic"], $row["Type"], $row["Requested_on"], $row["Deadline"], $row["Status"], $row["Satisfied"] );
-                array_push($allRequests, $newRequest);
-            }
-
         ?>
         <meta charset="utf-8"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
@@ -73,7 +45,8 @@
                                     $status = $allProgrammers[$i]->getStatus();
                                     $mail = $allProgrammers[$i]->getEmail();
                                     $username = $allProgrammers[$i]->getUsername();
-                                    if($username != $_GET['user']) {
+                                    $uid = $allProgrammers[$i]->getId();
+                                    if($uid != $_GET['user']) {
                                         if ($status == "AVAILABLE") {
                                         echo ("<li> <a href='mailto:$mail' id='you' class='programmer-icon' style='background-color: #00ff00'> $name is $status </a></li>");
                                         }
@@ -194,7 +167,7 @@
                             $deadline = $allRequests[$i]->getDeadline();
                             $status = $allRequests[$i]->getStatus();
 
-                            if ($status != "DONE" && $status == "REQUESTED") {
+                            if ($status == "REQUESTED") {
                                 echo("
                                     <tr>
                                         <td class='requester'> <a style='width=100%; height=100%;' href=mailto:''> $requestedBy </a> </td>
@@ -244,7 +217,7 @@
                                     $deadline = $allRequests[$i2]->getDeadline();
                                     $status = $allRequests[$i2]->getStatus();
 
-                                    if ($status ="IN PROGRESS" && $workingOn == $_GET['user']) {
+                                    if ($status == "IN PROGRESS" && $workingOn == $_GET['user']) {
                                     
                                         echo("
                                             <tr>

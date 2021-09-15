@@ -222,6 +222,17 @@ function submitColorChange() {
     document.getElementById("programmer-chart").style.background = "linear-gradient(to bottom, "+ color1 +" 0%, " + color2 +" 100%)";
     document.getElementById("programms").style.background = "linear-gradient(to bottom, "+ color1 +" 0%, " + color2 +" 100%)";
 }
+
+function search(seek) {
+    fetch("http://localhost/htmlProject/phpStuff/search.php?search="+seek, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+        body: `search=${seek}`
+    });
+}
+
 //Animations________________________________________________________________________________________________________________________________________________
 function newsBlockOpen(id) {
     const element = (document.getElementById(id));

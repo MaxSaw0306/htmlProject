@@ -21,34 +21,6 @@
             ");
 
             include 'class.php';
-
-            $sqlGetAllUsers = $conn->query("SELECT * FROM `user`");
-            $allUsers = array();
-            while ($row = $sqlGetAllUsers -> fetch_assoc()) {
-                $newUser = new User($row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
-                array_push($allUsers,$newUser);
-            }
-
-            $sqlGetAllProgrammers = $conn->query("SELECT * FROM `programmer` INNER JOIN `user` ON `programmer`.`P_ID`=`user`.`ID`");
-            $allProgrammers = array();
-            while ($row = $sqlGetAllProgrammers -> fetch_assoc()) {
-                $newProgrammer = new Programmer($row["P_ID"], $row["First_Name"], $row["Last_Name"], $row["Done_Request"], $row["Status"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
-                array_push($allProgrammers, $newProgrammer);
-            }
-
-            $sqlGetAllCustommers = $conn->query("SELECT * FROM `customer` INNER JOIN `user` ON `customer`.`C_ID`=`user`.`ID`");
-            $allCustomers = array();
-            while ($row = $sqlGetAllCustommers -> fetch_assoc()) {
-                $newCustommer = new Customer($row["C_ID"], $row["FirstName_or_NameOfCompany"], $row["Last_Name"], $row["Phone"], $row["Company_or_Privat"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
-                array_push($allCustomers, $newCustommer);
-            }
-
-            $sqlGetAllRequests = $conn->query("SELECT * FROM `requests`");
-            $allRequests = array();
-            while ($row = $sqlGetAllRequests -> fetch_assoc()) {
-                $newRequest = new Request($row["R_ID"], $row["Requested_by"], $row["Working_on"], $row["Topic"], $row["Type"], $row["Requested_on"], $row["Deadline"], $row["Status"], $row["Satisfied"] );
-                array_push($allRequests, $newRequest);
-            }
         ?>
         <meta charset="utf-8"/>
         <link rel="shortcut icon" type="x-icon" href="logo_small_icon_only.png"/>
@@ -73,7 +45,9 @@
                                     $status = $allProgrammers[$i]->getStatus();
                                     $mail = $allProgrammers[$i]->getEmail();
                                     $username = $allProgrammers[$i]->getUsername();
-                                    if($username != $_GET['user']) {
+                                    $uid = $allProgrammers[$i]->getId();
+
+                                    if($uid != $_GET['user']) {
                                         if ($status == "AVAILABLE") {
                                         echo ("<li> <a href='mailto:$mail' id='you' class='programmer-icon' style='background-color: #00ff00'> $name is $status </a></li>");
                                         }
@@ -118,9 +92,10 @@
                     </li>
                     <li>
                         <form class="search-field">
-                            <input class="type-field" type="text" placeholder="Name/Mail/ID..."/>
-                            <input class="search-button" type="submit" value="🔎"/>
+                            <input class="type-field" type="text" name="search" placeholder="Name/Mail/ID..."/>
+                            <input class="search-button" type="submit" value="🔎" onclick="search($_GET['search'])"/>
                         </form>
+
                     </li>
                     <li class="help">
                         <a href="mailto:maxwels.contacts@gmail.com" class="list-face">
@@ -135,10 +110,6 @@
                         <a class="list-face" onclick="showAll()">
                             Show all
                         </a>
-                        <ul>
-                            <?php
-                            ?>
-                        </ul>
                     </li>
                     <li class="add-request">
                         <a class="list-face" onclick="addRequests()">
@@ -169,7 +140,6 @@
                                 </thead>
                                 <tbody>
                         ");
-
                         for ($i = 0; $i < count($allRequests); $i++) {
                             $rid = $allRequests[$i]->getRid();
                             $requestedBy = $allRequests[$i]->getRequestedBy();
@@ -179,7 +149,6 @@
                             $requestedOn = $allRequests[$i]->getRequestedOn();
                             $deadline = $allRequests[$i]->getDeadline();
                             $status = $allRequests[$i]->getStatus();
-
                             if ($status != "DONE" && $requestedBy == $_GET['user'] ) {
                                 echo("
                                     <tr>
@@ -201,51 +170,48 @@
                 </div>
                 <div class="all-requests" id="doneRequests">
                     <?php
-                        if(isset($_GET['user'])) {
-                            $id = $_GET['user'];
-                            $sqlGetRequests = "SELECT * FROM requests WHERE `Requested_by` = '$id' AND `Status` = 'DONE'";
-                            $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
-                            $requestList = array("0");
-                            echo( "
-                                <table class='request-table'>
-                                    <thead>
-                                        <tr>
-                                            <th> Working on </th>
-                                            <th> Topic </th>
-                                            <th> Requested on </th>
-                                            <th> Deadline </th>
-                                            <th> Status </th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                            ");
-                            while ($row2 = $GetRequests-> fetch_assoc()) {
-                                array_push($requestList, $row2["Working_on"], $row2["Topic"], $row2["Requested_on"], $row2["Deadline"], $row2["Status"] );
+                        echo( "
+                            <table class='request-table' id='request-table'>
+                                <thead>
+                                    <tr>
+                                        <th> Working on </th>
+                                        <th> Topic </th>
+                                        <th> Type </th>
+                                        <th> Requested on </th>
+                                        <th> Deadline </th>
+                                        <th> Status </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                        ");
+
+                        for ($i = 0; $i < count($allRequests); $i++) {
+                            $rid = $allRequests[$i]->getRid();
+                            $requestedBy = $allRequests[$i]->getRequestedBy();
+                            $workingOn = $allRequests[$i]->getWorkingOn();
+                            $topic = $allRequests[$i]->getTopic();
+                            $type = $allRequests[$i]->getType();
+                            $requestedOn = $allRequests[$i]->getRequestedOn();
+                            $deadline = $allRequests[$i]->getDeadline();
+                            $status = $allRequests[$i]->getStatus();
+
+                            if ($status == "DONE" && $requestedBy == $_GET['user'] ) {
+                                echo("
+                                    <tr>
+                                        <td class='requester'> <a style='width=100%; height=100%;' href=mailto:''> $workingOn </a> </td>
+                                        <td> $topic </td>
+                                        <td> $type </td>
+                                        <td> $requestedOn </td>
+                                        <td> $deadline </td>
+                                        <td> $status </td>
+                                    </tr>"
+                                );
                             }
-                            $requestCounter = count($requestList);
-                            for ($i = ($requestCounter -1); $i > 0; $i--) {
-                                if ($i % 5 == 0 && $i != 0) {
-                                    $requestStatus = $requestList[$i-4];
-                                    $requestDeadline = $requestList[$i-3];
-                                    $requestRequestedOn = $requestList[$i-2];
-                                    $requestTopic = $requestList[$i-1];
-                                    $requestWorkingOn = $requestList[$i];
-                                    echo("
-                                        <tr>
-                                            <td> $requestStatus </td>
-                                            <td> $requestDeadline </td>
-                                            <td> $requestRequestedOn </td>
-                                            <td> $requestTopic </td>
-                                            <td> $requestWorkingOn </td>
-                                        </tr>"
-                                    );        
-                                }
-                            }
-                            echo("
-                                    </tbody>
-                                </table>
-                            ");
                         }
+                        echo("
+                                </tbody>
+                            </table>
+                        ");
                     ?>
                 </div>
                 <div class="all-requests" id="addRequests">
@@ -275,7 +241,7 @@
                                     $topic = $_GET['topic'];
                                     $sqlCreateRequest = "INSERT INTO `requests`(`Requested_by`, `Topic`, `Type`) VALUES ('$user', '$type', '$topic')";
                                     $conn->query($sqlCreateRequest) or die($conn-> error);
-                                    echo ("<script> self.location = 'http://localhost/htmlProject/phpStuff/requestCustomer.php?user=' </script>");
+                                    echo ("<script> self.location = 'http://localhost/htmlProject/phpStuff/requestCustomer.php?user=$user' </script>");
                                 }
                             ?>
                         </form>

@@ -16,9 +16,9 @@
             $test = 0;
             $loggedIn = 0;
             $version = rand(0,999999999) * rand(0,999999999);
-            echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>")
+            echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>");
 
-            
+            include 'class.php';
         ?>
         <title>
             Maxwels
@@ -53,11 +53,11 @@
 
                                         if ($name == $user && $password == $password2) {
                                             echo('<script>loginOut()</script>');
-                                            $loggedIn = $name;
+                                            $loggedIn = $id;
                                             $test = 2;
                                         }
                                     }
-                                    
+
                                     if ($test == 2 ) {
                                     } else {
                                         echo('<script/>logout()</script>');
@@ -77,7 +77,7 @@
                     if ($test == 2 ) {
                         echo('<script>test()</script>');
 
-                        $sqlTestIs = "SELECT `is` from `user` WHERE `Username` = '$loggedIn';";
+                        $sqlTestIs = "SELECT `is` from `user` WHERE `ID` = '$loggedIn';";
                         $TestIs = $conn->query($sqlTestIs);
                         while($row = mysqli_fetch_assoc($TestIs)) {
                             if($row["is"] == "Programmer" || $row["is"] == "Master") {
@@ -151,8 +151,12 @@
                                 $sqlGetAllRequests = $conn->query("SELECT COUNT(*) as total FROM `requests` WHERE `Satisfied` = 'YES'");
                                 $row = $sqlGetAllRequests -> fetch_assoc();
                                 $numberYes = $row['total'];
-                                $rating=(round(($numberYes / $number)*100));
-                                echo("<p id='81'>$rating%  satisfaction rate </p>");
+                                if($number + $numberYes > 1) {
+                                    $rating=(round(($numberYes / $number)*100));
+                                    echo("<p id='81'>$rating%  satisfaction rate </p>");
+                                }else{
+                                    echo("<p id='81'> No satisfaction rate </p>");
+                                }
                             ?>
                         </div>
                     </div>

@@ -218,4 +218,36 @@
             return $this->satisfied;
         }
     }
+    
+    $sqlGetAllUsers = $conn->query("SELECT * FROM `user`");
+    $allUsers = array();
+    while ($row = $sqlGetAllUsers -> fetch_assoc()) {
+        $newUser = new User($row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
+        array_push($allUsers,$newUser);
+    }
+
+    $sqlGetAllProgrammers = $conn->query("SELECT * FROM `programmer` INNER JOIN `user` ON `programmer`.`P_ID`=`user`.`ID`");
+    $allProgrammers = array();
+    while ($row = $sqlGetAllProgrammers -> fetch_assoc()) {
+        $newProgrammer = new Programmer($row["P_ID"], $row["First_Name"], $row["Last_Name"], $row["Done_Request"], $row["Status"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
+        array_push($allProgrammers, $newProgrammer);
+    }
+
+    $sqlGetAllCustommers = $conn->query("SELECT * FROM `customer` INNER JOIN `user` ON `customer`.`C_ID`=`user`.`ID`");
+    $allCustomers = array();
+    while ($row = $sqlGetAllCustommers -> fetch_assoc()) {
+        $newCustommer = new Customer($row["C_ID"], $row["FirstName_or_NameOfCompany"], $row["Last_Name"], $row["Phone"], $row["Company_or_Privat"], $row["ID"], $row["Username"], $row["Email"], $row["Password"], $row["is"], $row["Date of creation"]);
+        array_push($allCustomers, $newCustommer);
+    }
+
+    $sqlGetAllRequests = $conn->query("SELECT * FROM `requests`");
+    $allRequests = array();
+    while ($row = $sqlGetAllRequests -> fetch_assoc()) {
+        $newRequest = new Request($row["R_ID"], $row["Requested_by"], $row["Working_on"], $row["Topic"], $row["Type"], $row["Requested_on"], $row["Deadline"], $row["Status"], $row["Satisfied"] );
+        array_push($allRequests, $newRequest);
+    }
+
+    function test($q) {
+        echo($q);
+    }
 ?>
