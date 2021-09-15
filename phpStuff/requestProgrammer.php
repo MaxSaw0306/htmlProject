@@ -270,43 +270,47 @@
                 </div>
                 <div class="all-requests" id="doneRequests">
                     <?php
-                        $sqlGetRequests = "SELECT * FROM requests WHERE `Working_on` = '$id' AND `Status` = 'DONE' ";
-                        $GetRequests = $conn->query($sqlGetRequests) or die($conn->error);
-                        $requestList = array("0");
+                        
                         echo( "
-                            <table id='done-table' class='request-table'>
+                            <table class='request-table' id='request-table'>
                                 <thead>
                                     <tr>
-                                        <th> Working on </th>
+                                        <th> Requested by </th>
                                         <th> Topic </th>
-                                        <th> Requested on </th>
-                                        <th> Deadline </th>
-                                        <th> Status </th>
+                                        <th> Type </th>
+                                        <th> Satisfied </th>
                                     </tr>
                                 </thead>
                                 <tbody>
                         ");
-                        while ($row2 = $GetRequests-> fetch_assoc()) {
-                            array_push($requestList, $row2["Working_on"], $row2["Topic"], $row2["Requested_on"], $row2["Deadline"], $row2["Status"] );
-                        }
-                        $requestCounter = count($requestList);
-                        for ($i = ($requestCounter -1); $i > 0; $i--) {
-                            if ($i % 5 == 0 && $i != 0) {
-                                $requestStatus = $requestList[$i-4];
-                                $requestDeadline = $requestList[$i-3];
-                                $requestRequestedOn = $requestList[$i-2];
-                                $requestTopic = $requestList[$i-1];
-                                $requestWorkingOn = $requestList[$i];
-                                echo("
-                                    <tr>
-                                        <td> $requestStatus </td>
-                                        <td> $requestDeadline </td>
-                                        <td> $requestRequestedOn </td>
-                                        <td> $requestTopic </td>
-                                        <td> $requestWorkingOn </td>
-                                    </tr>"
-                                );        
+
+                        for ($i = 0; $i < count($allProgrammers); $i++) {
+                            if ($allProgrammers[$i]->getUsername() == $_GET['user']);{
+                                for ($i2 = 0; $i2 < count($allRequests); $i2++) {
+                                    $rid = $allRequests[$i2]->getRid();
+                                    $requestedBy = $allRequests[$i2]->getRequestedBy();
+                                    $workingOn = $allRequests[$i2]->getWorkingOn();
+                                    $topic = $allRequests[$i2]->getTopic();
+                                    $type = $allRequests[$i2]->getType();
+                                    $requestedOn = $allRequests[$i2]->getRequestedOn();
+                                    $deadline = $allRequests[$i2]->getDeadline();
+                                    $status = $allRequests[$i2]->getStatus();
+                                    $satisfaction = $allRequests[$i2]->getSatisfied();
+
+                                    if ($status == "DONE" && $workingOn == $_GET['user']) {
+                                    
+                                        echo("
+                                            <tr>
+                                                <td class='requester'> <a style='width=100%; height=100%;' href=mailto:''> $requestedBy </a> </td>
+                                                <td> $topic </td>
+                                                <td> $type </td>
+                                                <td> $satisfaction </td>
+                                            </tr>"
+                                        );
+                                    }
+                                }
                             }
+                            break;
                         }
                         echo("
                                 </tbody>

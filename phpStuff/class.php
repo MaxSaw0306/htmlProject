@@ -170,7 +170,7 @@
         public $deadline;
         public $status;
 
-        function __construct($rid, $requestedBy, $workingOn, $topic, $type, $requestedOn, $deadline, $status) {
+        function __construct($rid, $requestedBy, $workingOn, $topic, $type, $requestedOn, $deadline, $status, $satisfied) {
             $this->rid = $rid;
             $this->requestedBy = $requestedBy;
             $this->workingOn = $workingOn;
@@ -179,6 +179,7 @@
             $this->requestedOn = $requestedOn;
             $this->deadline = $deadline;
             $this->status = $status;
+            $this->satisfied =$satisfied;
         }
 
         public function getRid() {
@@ -211,6 +212,10 @@
 
         public function getStatus() {
             return $this->status;
+        }
+
+        public function getSatisfied() {
+            return $this->satisfied;
         }
     }
 ?>

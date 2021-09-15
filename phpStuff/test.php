@@ -17,6 +17,8 @@
             $loggedIn = 0;
             $version = rand(0,999999999) * rand(0,999999999);
             echo("<link rel='stylesheet' href='phpstyle.css?v=$version'/>")
+
+            
         ?>
         <title>
             Maxwels
@@ -43,26 +45,16 @@
                                     $name = $_GET['user'];
                                     $password = $_GET['login-password'];
 
-                                    $sqlTestUsername = "SELECT `Username` from `user` WHERE `Username` = '$name';";
-                                    $TestUSername=$conn->query($sqlTestUsername);
-                                    $sqlTestPass = "SELECT `Password` from `user` WHERE `Username` = '$name';";
-                                    $TestPass=$conn->query($sqlTestPass);
-                                    $sqlTestID = "SELECT `ID` from `user` WHERE `Username` = '$name';";
-                                    $TestID=$conn->query($sqlTestID);
-                                    $test = 0;
-                                    $getID = mysqli_query($conn, "SELECT ID as id FROM user WHERE `Username` = '$name';");
-                                    $id = mysqli_fetch_assoc($getID);
-                                    $ID = ($id['id']);
-                                    while($row = mysqli_fetch_assoc($TestUSername)) {
-                                        if($row["Username"] == $name) {
-                                            while($row = mysqli_fetch_assoc($TestPass)) {
-                                                if($row["Password"] == $password) {
-                                                    echo('<script>loginOut()</script>');
-                                                    $loggedIn = $name;
-                                                    $test=2;
-                                                    break;
-                                                }
-                                            }
+                                    for ($i = 0; $i < count($allUsers); $i++) {
+                                        $id = $allUsers[$i]->getId();
+                                        $user = $allUsers[$i]->getUsername();
+                                        $email = $allUsers[$i]->getEmail();
+                                        $password2 = $allUsers[$i]->getPassword();
+
+                                        if ($name == $user && $password == $password2) {
+                                            echo('<script>loginOut()</script>');
+                                            $loggedIn = $name;
+                                            $test = 2;
                                         }
                                     }
                                     
